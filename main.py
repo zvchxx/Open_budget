@@ -4,7 +4,7 @@ def main():
           "3. Exit\n")
 
     print("""
-    super admin login&password = super
+    admin login&password = admin
     """)
     choice = input("Enter your choice: ")
 
