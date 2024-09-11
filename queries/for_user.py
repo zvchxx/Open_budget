@@ -51,3 +51,23 @@ def get_user_from_email_query(email: str) -> DictRow:
     params = (email, True)
     result = execute_query(query, params, fetch='one')
     return result
+
+
+def insert_user_query(email: str, password: str, first_name: str, last_name: str, role_id: int) -> None:
+    """
+    Creates a query for inserting a new user into the database.
+
+    Args:
+        email (str): The email address of the user.
+        password (str): The password for the user.
+        first_name (str): The user's first name.
+        last_name (str): The user's last name.
+        role_id (int): The ID of the user's role.
+    """
+    query = """
+    INSERT INTO users (email, password, first_name, last_name, role_id)
+    VALUES (%s, %s, %s, %s, %s);
+    """
+    params = (email, password, first_name, last_name, role_id)
+    execute_query(query, params)
+    return None
