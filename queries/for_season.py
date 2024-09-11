@@ -19,3 +19,18 @@ def create_seasons_table_query() -> None:
     """)
     return None
 
+
+def get_season_from_id_query(season_id: int) -> DictRow:
+    """
+    Retrieves a season from the database by its ID.
+
+    Args:
+        season_id (int): The ID of the season to retrieve.
+
+    Returns:
+        DictRow: The retrieved season.
+    """
+    query = f"SELECT * FROM seasons WHERE id = %s;"
+    params = (season_id,)
+    result = execute_query(query, params, fetch='one')
+    return result
