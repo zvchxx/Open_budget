@@ -65,3 +65,20 @@ def insert_category_query(name: str, status: bool) -> None:
     execute_query(query, params)
     return None
 
+
+def update_category_query(category_id: int, name: str, status: bool) -> None:
+    """
+    Updates a category's name in the database.
+
+    Args:
+        category_id (int): The ID of the category to update.
+        name (str): The new name of the category.
+
+    Returns:
+        None.
+    """
+    query = "UPDATE categorys SET name = %s, status = %s WHERE id = %s;"
+    params = (name, status, category_id,)
+    execute_query(query, params)
+    return None
+
