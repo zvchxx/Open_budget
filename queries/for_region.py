@@ -28,7 +28,7 @@ def get_region_from_id_query(region_id: int) -> DictRow:
         DictRow: The retrieved region.
     """
     query = f"SELECT * FROM regions WHERE id = %s;"
-    params = (region_id, True)
+    params = (region_id,)
     result = execute_query(query, params, fetch='one')
     return result
 
@@ -44,7 +44,7 @@ def get_region_from_name_query(name: str) -> DictRow:
         DictRow: The retrieved region.
     """
     query = f"SELECT * FROM regions WHERE name = %s;"
-    params = (name, True)
+    params = (name,)
     result = execute_query(query, params, fetch='one')
     return result
 
@@ -77,7 +77,7 @@ def update_region_query(region_id: int, name: str) -> None:
         None.
     """
     query = "UPDATE regions SET name = %s WHERE id = %s;"
-    params = (name, region_id, True)
+    params = (name, region_id,)
     execute_query(query, params)
     return None
 
@@ -93,7 +93,7 @@ def delete_region_query(region_id: int) -> None:
         None.
     """
     query = "Delete regions WHERE id = %s;"
-    params = ( region_id)
+    params = ( region_id,)
     execute_query(query, params)
     return None
 

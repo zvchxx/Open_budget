@@ -49,7 +49,7 @@ def get_user_from_email_query(email: str) -> DictRow:
         DictRow: The retrieved user.
     """
     query = "SELECT * FROM users WHERE email = %s;"
-    params = (email)
+    params = (email,)
     result = execute_query(query, params, fetch='one')
     return result
 
@@ -68,7 +68,7 @@ def insert_user_query(email: str, password: str, first_name: str, last_name: str
     INSERT INTO users (email, password, first_name, last_name)
     VALUES (%s, %s, %s, %s);
     """
-    params = (email, password, first_name, last_name)
+    params = (email, password, first_name, last_name,)
     execute_query(query, params)
     return None
 
@@ -89,7 +89,7 @@ def update_user_query(user_id: int, email: str, password: str, first_name: str, 
     SET email = %s, password = %s, first_name = %s, last_name = %s
     WHERE id = %s;
     """
-    params = (email, password, first_name, last_name, user_id)
+    params = (email, password, first_name, last_name, user_id,)
     execute_query(query, params)
     return None
 
@@ -102,7 +102,7 @@ def delete_user_query(user_id: int) -> None:
         user_id (int): The ID of the user.
     """
     query = "Delete users WHERE id = %s;"
-    params = (user_id)
+    params = (user_id,)
     execute_query(query, params)
     return None
 
@@ -136,7 +136,7 @@ def get_users_by_role_query(role_id: int) -> list:
         List[DictRow]: The retrieved users.
     """
     query = "SELECT * FROM users WHERE role_id = %s;"
-    params = (role_id)
+    params = (role_id,)
     result = execute_query(query, params, fetch='all')
     return result
 

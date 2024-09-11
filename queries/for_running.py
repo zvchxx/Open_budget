@@ -3,7 +3,7 @@ import os
 from database_config.db_settings import execute_query
 
 from .for_user import create_users_table_query
-from .for_regions import create_regions_table_query
+from .for_region import create_regions_table_query
 
 
 def create_is_used_table_query() -> None:
