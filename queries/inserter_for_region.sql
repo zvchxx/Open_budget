@@ -1,0 +1,15 @@
+insert into regions (name) values ('Andijon viloyati');
+insert into regions (name) values ('Buxoro viloyati');
+insert into regions (name) values ('Jizzax viloyati');
+insert into regions (name) values ('Qashqadaryo viloyati');
+insert into regions (name) values ('Navoiy viloyati');
+insert into regions (name) values ('Namangan viloyati');
+insert into regions (name) values ('Samarqand viloyati');
+insert into regions (name) values ('Surxondaryo viloyati');
+insert into regions (name) values ('Sirdaryo viloyati');
+insert into regions (name) values ('Toshkent shahri');
+insert into regions (name) values ('Toshkent viloyati');
+insert into regions (name) values ('Farg`ona viloyati');
+insert into regions (name) values ('Xorazm viloyati');
+insert into regions (name) values ('Toshkent');
+insert into regions (name) values ('Qoraqalpog`iston Respublikasi');
