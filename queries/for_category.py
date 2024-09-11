@@ -33,3 +33,19 @@ def get_category_from_id_query(category_id: int) -> DictRow:
     result = execute_query(query, params, fetch='one')
     return result
 
+
+def get_category_from_name_query(name: str) -> DictRow:
+    """
+    Retrieves a category from the database by its name.
+
+    Args:
+        name (str): The name of the category to retrieve.
+
+    Returns:
+        DictRow: The retrieved category.
+    """
+    query = f"SELECT * FROM categorys WHERE name = %s;"
+    params = (name,)
+    result = execute_query(query, params, fetch='one')
+    return result
+
