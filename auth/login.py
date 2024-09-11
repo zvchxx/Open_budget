@@ -10,7 +10,7 @@ def login():
 
     if email == "abubakrrahmatullayev1001@gmail.com" and password == "admin":
         print("Login successful as Super Admin!")
-        return "abubakrrahmatullayev1001@gmail.com", "admin"
+        return "abubakrrahmatullayev1001@gmail.com"
 
     user_data = get_user_from_email_query(email)
     if user_data is None:

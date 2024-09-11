@@ -16,7 +16,7 @@ def create_users_table_query() -> None:
         last_name VARCHAR(64) NOT NULL,
         email VARCHAR(64) NOT NULL UNIQUE,
         password VARCHAR(64) NOT NULL,
-        created_at TIMESTAMPTZ DEFAULT NOW(),
+        created_at TIMESTAMPTZ DEFAULT NOW()
     );
     """)
     return None
@@ -32,8 +32,8 @@ def get_user_from_id_query(user_id: int) -> DictRow:
     Returns:
         DictRow: The retrieved user.
     """
-    query = "SELECT * FROM users WHERE id = %s AND status = %s;"
-    params = (user_id, True)
+    query = "SELECT * FROM users WHERE id = %s;"
+    params = (user_id)
     result = execute_query(query, params, fetch='one')
     return result
 
@@ -48,8 +48,8 @@ def get_user_from_email_query(email: str) -> DictRow:
     Returns:
         DictRow: The retrieved user.
     """
-    query = "SELECT * FROM users WHERE email = %s AND status = %s;"
-    params = (email, True)
+    query = "SELECT * FROM users WHERE email = %s;"
+    params = (email)
     result = execute_query(query, params, fetch='one')
     return result
 
@@ -87,9 +87,9 @@ def update_user_query(user_id: int, email: str, password: str, first_name: str, 
     query = """
     UPDATE users
     SET email = %s, password = %s, first_name = %s, last_name = %s
-    WHERE id = %s AND status = %s;
+    WHERE id = %s;
     """
-    params = (email, password, first_name, last_name, user_id, True)
+    params = (email, password, first_name, last_name, user_id)
     execute_query(query, params)
     return None
 
@@ -101,8 +101,8 @@ def delete_user_query(user_id: int) -> None:
     Args:
         user_id (int): The ID of the user.
     """
-    query = "UPDATE users SET status = %s WHERE id = %s;"
-    params = (False, user_id)
+    query = "Delete users WHERE id = %s;"
+    params = (user_id)
     execute_query(query, params)
     return None
 
@@ -114,13 +114,14 @@ def get_all_users_query() -> list:
     Returns:
         List[DictRow]: The retrieved users.
     """
-    query = "SELECT * FROM users WHERE status = %s;"
-    params = (True,)
-    result = execute_query(query, params, fetch='all')
+    query = "SELECT * FROM users;"
+    result = execute_query(query, fetch='all')
     if result:
-        print("user:")
+        print("users:")
         for user in result:
             user_printer(user=user)
+    else:
+        print("No users found.")
     return None
 
 
@@ -134,8 +135,8 @@ def get_users_by_role_query(role_id: int) -> list:
     Returns:
         List[DictRow]: The retrieved users.
     """
-    query = "SELECT * FROM users WHERE role_id = %s AND status = %s;"
-    params = (role_id, True)
+    query = "SELECT * FROM users WHERE role_id = %s;"
+    params = (role_id)
     result = execute_query(query, params, fetch='all')
     return result
 

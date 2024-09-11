@@ -3,3 +3,8 @@ def user_printer(user):
                   Email: {user[3]}, Password: {user[4]}, Role ID: {user[5]},
                   Create at: {user[4]}""")
       return None
+
+
+def region_printer(region):
+      print(f"""ID: {region[0]}, Name: {region[1]}, Status: {region[2]}""")
+      return None

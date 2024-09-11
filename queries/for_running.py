@@ -3,6 +3,7 @@ import os
 from database_config.db_settings import execute_query
 
 from .for_user import create_users_table_query
+from .for_regions import create_regions_table_query
 
 
 def create_is_used_table_query() -> None:
@@ -59,6 +60,7 @@ def before_run() -> None:
     Creates all required tables before running the application.
     """
     create_users_table_query()
+    create_regions_table_query()
     return None
 
 
@@ -74,13 +76,6 @@ def if_not_used():
             for line in lines:
                 query = line.strip()
                 execute_query(query)
-
-        with open(f"{path}/inserter_for_category.sql", 'r') as insert_file:
-            lines = insert_file.readlines()
-            for line in lines:
-                query = line.strip()
-                execute_query(query)
-
         update_is_used_query()
 
     return None
