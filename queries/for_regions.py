@@ -31,3 +31,20 @@ def get_region_from_id_query(region_id: int) -> DictRow:
     params = (region_id, True)
     result = execute_query(query, params, fetch='one')
     return result
+
+
+def get_region_from_name_query(name: str) -> DictRow:
+    """
+    Retrieves a region from the database by its name.
+
+    Args:
+        name (str): The name of the region to retrieve.
+
+    Returns:
+        DictRow: The retrieved region.
+    """
+    query = f"SELECT * FROM regions WHERE name = %s AND status = %s;"
+    params = (name, True)
+    result = execute_query(query, params, fetch='one')
+    return result
+
