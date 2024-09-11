@@ -48,3 +48,18 @@ def get_region_from_name_query(name: str) -> DictRow:
     result = execute_query(query, params, fetch='one')
     return result
 
+
+def insert_region_query(name: str) -> None:
+    """
+    Inserts a new region into the database.
+
+    Args:
+        name (str): The name of the new region.
+
+    Returns:
+        None.
+    """
+    query = "INSERT INTO regions (name) VALUES (%s);"
+    params = (name,)
+    execute_query(query, params)
+    return None
