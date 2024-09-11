@@ -99,3 +99,22 @@ def delete_season_query(season_id: int) -> None:
     params = ( season_id,)
     execute_query(query, params)
     return None
+
+
+def get_all_seasons_query() -> list:
+    """
+    Retrieves all seasons from the database.
+
+    Returns:
+        List[DictRow]: The retrieved seasons.
+    """
+    query = "SELECT * FROM seasons;"
+    result = execute_query(query, fetch='all')
+    if result:
+        print("seasons:")
+        for season in result:
+           season_printer(season=season)
+    else:
+        print("No seasons found.")
+    return result
+
