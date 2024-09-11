@@ -69,3 +69,19 @@ def insert_appeal_query(start_date: str, end_date: str, is_active: bool, season_
     execute_query(query, params)
     return None
 
+
+def update_appeal_query(appeal_id: int, start_date: str, end_date: str, is_active: bool, season_id: int, total_appeals: str, status: bool) -> None:
+    """
+    Updates a appeal's name in the database.
+
+    Args:
+        appeal_id (int): The ID of the appeal to update.
+        name (str): The new name of the appeal.
+
+    Returns:
+        None.
+    """
+    query = "UPDATE appeals SET start_date = %s, end_date = %s, is_active = %s, season_id = %s, total_appeals = %s, status = %s WHERE id = %s;"
+    params = (start_date, end_date, is_active, season_id, total_appeals, status, appeal_id,)
+    execute_query(query, params)
+    return None
