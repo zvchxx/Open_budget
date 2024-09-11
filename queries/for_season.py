@@ -67,3 +67,19 @@ def insert_season_query(start_date: str, end_date: str, is_active: bool, status:
     execute_query(query, params)
     return None
 
+
+def update_season_query(season_id: int, start_date: str, end_date: str, is_active: bool, status: bool) -> None:
+    """
+    Updates a season's name in the database.
+
+    Args:
+        season_id (int): The ID of the season to update.
+        name (str): The new name of the season.
+
+    Returns:
+        None.
+    """
+    query = "UPDATE seasons SET start_date = %s, end_date = %s, is_active = %s, status = %s WHERE id = %s;"
+    params = (start_date, end_date, is_active, status, season_id,)
+    execute_query(query, params)
+    return None
