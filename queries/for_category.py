@@ -98,3 +98,20 @@ def delete_category_query(category_id: int) -> None:
     execute_query(query, params)
     return None
 
+
+def get_all_categorys_query() -> list:
+    """
+    Retrieves all categorys from the database.
+
+    Returns:
+        List[DictRow]: The retrieved categorys.
+    """
+    query = "SELECT * FROM categorys;"
+    result = execute_query(query, fetch='all')
+    if result:
+        print("categorys:")
+        for category in result:
+           category_printer(category=category)
+    else:
+        print("No categorys found.")
+    return result
