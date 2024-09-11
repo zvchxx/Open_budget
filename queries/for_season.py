@@ -62,8 +62,8 @@ def insert_season_query(start_date: str, end_date: str, is_active: bool, status:
     Returns:
         None.
     """
-    query = "INSERT INTO seasons (name, start_date, end_date, is_active, status) VALUES (%s, %s, %s, %s);"
-    params = (start_date, end_date, is_active, status)
+    query = "INSERT INTO seasons (start_date, end_date, is_active, status) VALUES (%s, %s, %s, %s);"
+    params = (start_date, end_date, is_active, status,)
     execute_query(query, params)
     return None
 
