@@ -6,5 +6,10 @@ def user_printer(user):
 
 
 def region_printer(region):
-      print(f"""ID: {region[0]}, Name: {region[1]}, Status: {region[2]}""")
+      print(f"""ID: {region[0]}, Name: {region[1]}""")
+      return None
+
+
+def city_printer(city):
+      print(f"""ID: {city[0]}, Name: {city[1]}, Region ID: {city[3]}""")
       return None
