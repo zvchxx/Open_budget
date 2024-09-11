@@ -61,7 +61,7 @@ def insert_category_query(name: str, status: bool) -> None:
         None.
     """
     query = "INSERT INTO categorys (name, status) VALUES (%s, %s);"
-    params = (name, bool,)
+    params = (name, status,)
     execute_query(query, params)
     return None
 
