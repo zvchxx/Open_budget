@@ -49,3 +49,19 @@ def get_category_from_name_query(name: str) -> DictRow:
     result = execute_query(query, params, fetch='one')
     return result
 
+
+def insert_category_query(name: str, status: bool) -> None:
+    """
+    Inserts a new category into the database.
+
+    Args:
+        name (str): The name of the new category.
+
+    Returns:
+        None.
+    """
+    query = "INSERT INTO categorys (name, status) VALUES (%s, %s);"
+    params = (name, bool,)
+    execute_query(query, params)
+    return None
+
