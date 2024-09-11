@@ -101,3 +101,21 @@ def delete_appeal_query(appeal_id: int) -> None:
     params = ( appeal_id,)
     execute_query(query, params)
     return None
+
+
+def get_all_appeals_query() -> list:
+    """
+    Retrieves all appeals from the database.
+
+    Returns:
+        List[DictRow]: The retrieved appeals.
+    """
+    query = "SELECT * FROM appeals;"
+    result = execute_query(query, fetch='all')
+    if result:
+        print("appeals:")
+        for appeal in result:
+           appeal_printer(appeal=appeal)
+    else:
+        print("No appeals found.")
+    return result
