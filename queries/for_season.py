@@ -51,3 +51,19 @@ def get_season_from_is_active_query(is_active: bool) -> DictRow:
     result = execute_query(query, params, fetch='one')
     return result
 
+
+def insert_season_query(start_date: str, end_date: str, is_active: bool, status: bool) -> None:
+    """
+    Inserts a new season into the database.
+
+    Args:
+        name (str): The name of the new season.
+
+    Returns:
+        None.
+    """
+    query = "INSERT INTO seasons (name, start_date, end_date, is_active, status) VALUES (%s, %s, %s, %s);"
+    params = (start_date, end_date, is_active, status)
+    execute_query(query, params)
+    return None
+
