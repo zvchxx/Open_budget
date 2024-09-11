@@ -31,3 +31,12 @@ def appeal_printer(appeal):
                   End date: {appeal[2]}, Is active: {appeal[3]}, Season ID {[4]},
                   Total appeals{[5]}, Status: {appeal[6]}""")
       return None
+
+
+def petition_printer(petition):
+      print(f"""ID: {petition[0]}, Title: {petition[1]}, 
+                  Content: {petition[2]}, Money: {petition[3]}, 
+                  City ID: {petition[4]}, Is winner: {petition[5]}, Is accepted: {petition[6]},
+                  Appeal ID: {petition[7]}, Category ID: {petition[8]}, Total voices: {petition[9]},
+                  Status: {petition[100]}, User ID: {petition[11]}""")
+      return None
