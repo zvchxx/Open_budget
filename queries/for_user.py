@@ -93,3 +93,16 @@ def update_user_query(user_id: int, email: str, password: str, first_name: str, 
     params = (email, password, first_name, last_name, role_id, user_id, True)
     execute_query(query, params)
     return None
+
+
+def delete_user_query(user_id: int) -> None:
+    """
+    Creates a query for deleting a user from the database.
+
+    Args:
+        user_id (int): The ID of the user.
+    """
+    query = "UPDATE users SET status = %s WHERE id = %s;"
+    params = (False, user_id)
+    execute_query(query, params)
+    return None
