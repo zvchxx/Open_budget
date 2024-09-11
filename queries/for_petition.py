@@ -138,3 +138,16 @@ def get_all_petitions_query() -> list:
     return result
 
 
+def search_petition(petition_id: int):
+    """
+    Search for petition in the petition table.
+    """
+    query = "SELECT * FROM petition WHERE id LIKE %s;"
+    result = execute_query(query, params=("%" + petition_id + "%",), fetch="all")
+    if result:
+        print("petition:")
+        for petition in result:
+           petition_printer(petition=petition)
+    else:
+        print("No petition found.")
+    return None
