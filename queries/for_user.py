@@ -71,3 +71,25 @@ def insert_user_query(email: str, password: str, first_name: str, last_name: str
     params = (email, password, first_name, last_name, role_id)
     execute_query(query, params)
     return None
+
+
+def update_user_query(user_id: int, email: str, password: str, first_name: str, last_name: str, role_id: int) -> None:
+    """
+    Creates a query for updating a user's information in the database.
+
+    Args:
+        user_id (int): The ID of the user.
+        email (str): The email address of the user.
+        password (str): The password for the user.
+        first_name (str): The user's first name.
+        last_name (str): The user's last name.
+        role_id (int): The ID of the user's role.
+    """
+    query = """
+    UPDATE users
+    SET email = %s, password = %s, first_name = %s, last_name = %s, role_id = %s
+    WHERE id = %s AND status = %s;
+    """
+    params = (email, password, first_name, last_name, role_id, user_id, True)
+    execute_query(query, params)
+    return None
