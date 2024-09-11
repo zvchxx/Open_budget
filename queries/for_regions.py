@@ -2,6 +2,8 @@ from psycopg2.extras import DictRow
 
 from database_config.db_settings import execute_query
 
+from utils.printer import region_printer
+
 
 def create_regions_table_query() -> None:
     """
@@ -97,3 +99,19 @@ def delete_region_query(region_id: int) -> None:
     execute_query(query, params)
     return None
 
+
+def get_all_regions_query() -> list:
+    """
+    Retrieves all regions from the database.
+
+    Returns:
+        List[DictRow]: The retrieved regions.
+    """
+    query = "SELECT * FROM regions WHERE status = %s;"
+    params = (True,)
+    result = execute_query(query, params, fetch='all')
+    if result:
+        print("region:")
+        for region in result:
+            region_printer(region=region)
+    return result
