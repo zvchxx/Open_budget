@@ -106,3 +106,16 @@ def delete_user_query(user_id: int) -> None:
     params = (False, user_id)
     execute_query(query, params)
     return None
+
+
+def get_all_users_query() -> list:
+    """
+    Creates a query for retrieving all users from the database.
+
+    Returns:
+        List[DictRow]: The retrieved users.
+    """
+    query = "SELECT * FROM users WHERE status = %s;"
+    params = (True,)
+    result = execute_query(query, params, fetch='all')
+    return result
