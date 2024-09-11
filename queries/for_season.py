@@ -83,3 +83,19 @@ def update_season_query(season_id: int, start_date: str, end_date: str, is_activ
     params = (start_date, end_date, is_active, status, season_id,)
     execute_query(query, params)
     return None
+
+
+def delete_season_query(season_id: int) -> None:
+    """
+    Deletes a season from the database.
+
+    Args:
+        season_id (int): The ID of the season to delete.
+
+    Returns:
+        None.
+    """
+    query = "Delete seasons WHERE id = %s;"
+    params = ( season_id,)
+    execute_query(query, params)
+    return None
