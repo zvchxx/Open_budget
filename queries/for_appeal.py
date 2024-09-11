@@ -85,3 +85,19 @@ def update_appeal_query(appeal_id: int, start_date: str, end_date: str, is_activ
     params = (start_date, end_date, is_active, season_id, total_appeals, status, appeal_id,)
     execute_query(query, params)
     return None
+
+
+def delete_appeal_query(appeal_id: int) -> None:
+    """
+    Deletes a appeal from the database.
+
+    Args:
+        appeal_id (int): The ID of the appeal to delete.
+
+    Returns:
+        None.
+    """
+    query = "Delete appeals WHERE id = %s;"
+    params = ( appeal_id,)
+    execute_query(query, params)
+    return None
