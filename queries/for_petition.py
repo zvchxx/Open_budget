@@ -57,3 +57,25 @@ def get_petition_from_is_active_query(is_active: bool) -> DictRow:
     params = (is_active,)
     result = execute_query(query, params, fetch='one')
     return result
+
+
+def insert_petition_query(title: str, content: str, money: str, city_id: int, is_winner: bool,
+                        is_accepted: bool, appeal_id: int, category_id: int, total_voices: str,
+                        status: bool, user_id: int) -> None:
+    """
+    Inserts a new petition into the database.
+
+    Args:
+        name (str): The name of the new petition.
+
+    Returns:
+        None.
+    """
+    query = """INSERT INTO petitions (title, content, money, city_id, is_winner,
+                        is_accepted, appeal_id, category_id, total_voices,
+                        status, user_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
+    params = (title, content, money, city_id, is_winner,
+                is_accepted, appeal_id, category_id, total_voices,
+                status, user_id,)
+    execute_query(query, params)
+    return None
