@@ -115,3 +115,18 @@ def get_all_regions_query() -> list:
         for region in result:
             region_printer(region=region)
     return result
+
+
+def search_region(region_id: int):
+    """
+    Search for region in the region table.
+    """
+    query = "SELECT * FROM region WHERE id LIKE %s;"
+    result = execute_query(query, params=("%" + region_id + "%",), fetch="all")
+    if result:
+        print("region:")
+        for region in result:
+           region_printer(region=region)
+    else:
+        print("No region found.")
+    return None
