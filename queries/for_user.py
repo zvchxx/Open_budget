@@ -35,3 +35,19 @@ def get_user_from_id_query(user_id: int) -> DictRow:
     params = (user_id, True)
     result = execute_query(query, params, fetch='one')
     return result
+
+
+def get_user_from_email_query(email: str) -> DictRow:
+    """
+    Creates a query for retrieving a user by their email from the database.
+
+    Args:
+        email (str): The email address of the user.
+
+    Returns:
+        DictRow: The retrieved user.
+    """
+    query = "SELECT * FROM users WHERE email = %s AND status = %s;"
+    params = (email, True)
+    result = execute_query(query, params, fetch='one')
+    return result
