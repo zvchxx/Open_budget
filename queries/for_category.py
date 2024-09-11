@@ -18,3 +18,18 @@ def create_categorys_table_query() -> None:
     return None
 
 
+def get_category_from_id_query(category_id: int) -> DictRow:
+    """
+    Retrieves a category from the database by its ID.
+
+    Args:
+        category_id (int): The ID of the category to retrieve.
+
+    Returns:
+        DictRow: The retrieved category.
+    """
+    query = f"SELECT * FROM categorys WHERE id = %s;"
+    params = (category_id,)
+    result = execute_query(query, params, fetch='one')
+    return result
+
