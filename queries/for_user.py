@@ -20,3 +20,18 @@ def create_users_table_query() -> None:
     """)
     return None
 
+
+def get_user_from_id_query(user_id: int) -> DictRow:
+    """
+    Creates a query for retrieving a user by their ID from the database.
+
+    Args:
+        user_id (int): The ID of the user.
+
+    Returns:
+        DictRow: The retrieved user.
+    """
+    query = "SELECT * FROM users WHERE id = %s AND status = %s;"
+    params = (user_id, True)
+    result = execute_query(query, params, fetch='one')
+    return result
