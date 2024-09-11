@@ -118,3 +118,17 @@ def get_all_seasons_query() -> list:
         print("No seasons found.")
     return result
 
+
+def search_season(season_id: int):
+    """
+    Search for season in the season table.
+    """
+    query = "SELECT * FROM season WHERE id LIKE %s;"
+    result = execute_query(query, params=("%" + season_id + "%",), fetch="all")
+    if result:
+        print("season:")
+        for season in result:
+           season_printer(season=season)
+    else:
+        print("No season found.")
+    return None
