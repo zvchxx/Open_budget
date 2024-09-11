@@ -103,3 +103,19 @@ def update_petition_query(petition_id: int, title: str, content: str, money: str
     execute_query(query, params)
     return None
 
+
+def delete_petition_query(petition_id: int) -> None:
+    """
+    Deletes a petition from the database.
+
+    Args:
+        petition_id (int): The ID of the petition to delete.
+
+    Returns:
+        None.
+    """
+    query = "Delete petitions WHERE id = %s;"
+    params = ( petition_id,)
+    execute_query(query, params)
+    return None
+
