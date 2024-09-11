@@ -81,3 +81,19 @@ def update_region_query(region_id: int, name: str) -> None:
     execute_query(query, params)
     return None
 
+
+def delete_region_query(region_id: int) -> None:
+    """
+    Deletes a region from the database.
+
+    Args:
+        region_id (int): The ID of the region to delete.
+
+    Returns:
+        None.
+    """
+    query = "UPDATE regions SET status = %s WHERE id = %s;"
+    params = (False, region_id)
+    execute_query(query, params)
+    return None
+
