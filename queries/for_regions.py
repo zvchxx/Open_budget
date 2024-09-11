@@ -63,3 +63,21 @@ def insert_region_query(name: str) -> None:
     params = (name,)
     execute_query(query, params)
     return None
+
+
+def update_region_query(region_id: int, name: str) -> None:
+    """
+    Updates a region's name in the database.
+
+    Args:
+        region_id (int): The ID of the region to update.
+        name (str): The new name of the region.
+
+    Returns:
+        None.
+    """
+    query = "UPDATE regions SET name = %s WHERE id = %s AND status = %s;"
+    params = (name, region_id, True)
+    execute_query(query, params)
+    return None
+
