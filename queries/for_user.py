@@ -2,6 +2,8 @@ from psycopg2.extras import DictRow
 
 from database_config.db_settings import execute_query
 
+from utils.printer import user_printer
+
 
 def create_users_table_query() -> None:
     """
@@ -120,10 +122,8 @@ def get_all_users_query() -> list:
     result = execute_query(query, params, fetch='all')
     if result:
         print("user:")
-        for branch in result:
-            print(f"""ID: {branch[0]}, First name: {branch[1]}, Last name: {branch[2]}, 
-                    Email: {branch[3]}, Password: {branch[4]}, Role ID: {branch[5]},
-                    Create at: {branch[4]}\n""")
+        for user in result:
+            user_printer(user=user)
     return None
 
 
@@ -151,10 +151,8 @@ def search_user(user_id: int):
     result = execute_query(query, params=("%" + user_id + "%",), fetch="all")
     if result:
         print("user:")
-        for branch in result:
-            print(f"""ID: {branch[0]}, First name: {branch[1]}, Last name: {branch[2]}, 
-                    Email: {branch[3]}, Password: {branch[4]}, Role ID: {branch[5]},
-                    Create at: {branch[4]}""")
+        for user in result:
+           user_printer(user=user)
     else:
         print("No user found.")
     return None
