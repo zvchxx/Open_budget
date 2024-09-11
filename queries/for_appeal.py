@@ -53,3 +53,19 @@ def get_appeal_from_is_active_query(is_active: bool) -> DictRow:
     result = execute_query(query, params, fetch='one')
     return result
 
+
+def insert_appeal_query(start_date: str, end_date: str, is_active: bool, season_id: int, total_appeals: str, status: bool) -> None:
+    """
+    Inserts a new appeal into the database.
+
+    Args:
+        name (str): The name of the new appeal.
+
+    Returns:
+        None.
+    """
+    query = "INSERT INTO appeals (start_date, end_date, is_active, season_id, total_appeals, status) VALUES (%s, %s, %s, %s, %s, %s);"
+    params = (start_date, end_date, is_active, season_id, total_appeals, status,)
+    execute_query(query, params)
+    return None
+
