@@ -115,3 +115,18 @@ def get_all_categorys_query() -> list:
     else:
         print("No categorys found.")
     return result
+
+
+def search_category(category_id: int):
+    """
+    Search for category in the category table.
+    """
+    query = "SELECT * FROM category WHERE id LIKE %s;"
+    result = execute_query(query, params=("%" + category_id + "%",), fetch="all")
+    if result:
+        print("category:")
+        for category in result:
+           category_printer(category=category)
+    else:
+        print("No category found.")
+    return None
