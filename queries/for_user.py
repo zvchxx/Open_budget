@@ -118,7 +118,13 @@ def get_all_users_query() -> list:
     query = "SELECT * FROM users WHERE status = %s;"
     params = (True,)
     result = execute_query(query, params, fetch='all')
-    return result
+    if result:
+        print("user:")
+        for branch in result:
+            print(f"""ID: {branch[0]}, First name: {branch[1]}, Last name: {branch[2]}, 
+                    Email: {branch[3]}, Password: {branch[4]}, Role ID: {branch[5]},
+                    Create at: {branch[4]}\n""")
+    return None
 
 
 def get_users_by_role_query(role_id: int) -> list:
@@ -135,3 +141,20 @@ def get_users_by_role_query(role_id: int) -> list:
     params = (role_id, True)
     result = execute_query(query, params, fetch='all')
     return result
+
+
+def search_user(user_id: int):
+    """
+    Search for user in the user table.
+    """
+    query = "SELECT * FROM user WHERE id LIKE %s;"
+    result = execute_query(query, params=("%" + user_id + "%",), fetch="all")
+    if result:
+        print("user:")
+        for branch in result:
+            print(f"""ID: {branch[0]}, First name: {branch[1]}, Last name: {branch[2]}, 
+                    Email: {branch[3]}, Password: {branch[4]}, Role ID: {branch[5]},
+                    Create at: {branch[4]}""")
+    else:
+        print("No user found.")
+    return None
