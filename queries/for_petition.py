@@ -119,3 +119,22 @@ def delete_petition_query(petition_id: int) -> None:
     execute_query(query, params)
     return None
 
+
+def get_all_petitions_query() -> list:
+    """
+    Retrieves all petitions from the database.
+
+    Returns:
+        List[DictRow]: The retrieved petitions.
+    """
+    query = "SELECT * FROM petitions;"
+    result = execute_query(query, fetch='all')
+    if result:
+        print("petitions:")
+        for petition in result:
+           petition_printer(petition=petition)
+    else:
+        print("No petitions found.")
+    return result
+
+
