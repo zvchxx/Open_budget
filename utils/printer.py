@@ -24,3 +24,10 @@ def season_printer(season):
       print(f"""ID: {season[0]}, Start date: {season[1]}, 
                   End date: {season[2]}, Is active: {season[3]}, Status: {season[4]}""")
       return None
+
+
+def appeal_printer(appeal):
+      print(f"""ID: {appeal[0]}, Start date: {appeal[1]}, 
+                  End date: {appeal[2]}, Is active: {appeal[3]}, Season ID {[4]},
+                  Total appeals{[5]}, Status: {appeal[6]}""")
+      return None
