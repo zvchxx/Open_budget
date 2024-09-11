@@ -79,3 +79,27 @@ def insert_petition_query(title: str, content: str, money: str, city_id: int, is
                 status, user_id,)
     execute_query(query, params)
     return None
+
+
+def update_petition_query(petition_id: int, title: str, content: str, money: str, city_id: int, is_winner: bool,
+                        is_accepted: bool, appeal_id: int, category_id: int, total_voices: str,
+                        status: bool, user_id: int) -> None:
+    """
+    Updates a petition's name in the database.
+
+    Args:
+        petition_id (int): The ID of the petition to update.
+        name (str): The new name of the petition.
+
+    Returns:
+        None.
+    """
+    query = """UPDATE petitions SET title = %s, content = %s, money = %s, city_id = %s, is_winner = %s,
+                is_accepted = %s, appeal_id = %s, category_id = %s, total_voices = %s,
+                status = %s, user_id = %s, WHERE id = %s;"""
+    params = (title, content, money, city_id, is_winner,
+                is_accepted, appeal_id, category_id, total_voices,
+                status, user_id, petition_id,)
+    execute_query(query, params)
+    return None
+
