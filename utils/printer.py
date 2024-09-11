@@ -13,3 +13,14 @@ def region_printer(region):
 def city_printer(city):
       print(f"""ID: {city[0]}, Name: {city[1]}, Region ID: {city[3]}""")
       return None
+
+
+def category_printer(category):
+      print(f"""ID: {category[0]}, Name: {category[1]}, Status: {category[3]}""")
+      return None
+
+
+def season_printer(season):
+      print(f"""ID: {season[0]}, Start date: {season[1]}, 
+                  End date: {season[2]}, Is active: {season[3]}, Status: {season[4]}""")
+      return None
