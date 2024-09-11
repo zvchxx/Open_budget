@@ -26,3 +26,34 @@ def create_petitions_table_query() -> None:
     """)
     return None
 
+
+def get_petition_from_id_query(petition_id: int) -> DictRow:
+    """
+    Retrieves a petition from the database by its ID.
+
+    Args:
+        petition_id (int): The ID of the petition to retrieve.
+
+    Returns:
+        DictRow: The retrieved petition.
+    """
+    query = f"SELECT * FROM petitions WHERE id = %s;"
+    params = (petition_id,)
+    result = execute_query(query, params, fetch='one')
+    return result
+
+
+def get_petition_from_is_active_query(is_active: bool) -> DictRow:
+    """
+    Retrieves a petition from the database by its name.
+
+    Args:
+        name (str): The name of the petition to retrieve.
+
+    Returns:
+        DictRow: The retrieved petition.
+    """
+    query = f"SELECT * FROM petitions WHERE is_active = %s;"
+    params = (is_active,)
+    result = execute_query(query, params, fetch='one')
+    return result
