@@ -34,3 +34,20 @@ def get_season_from_id_query(season_id: int) -> DictRow:
     params = (season_id,)
     result = execute_query(query, params, fetch='one')
     return result
+
+
+def get_season_from_is_active_query(is_active: bool) -> DictRow:
+    """
+    Retrieves a season from the database by its name.
+
+    Args:
+        name (str): The name of the season to retrieve.
+
+    Returns:
+        DictRow: The retrieved season.
+    """
+    query = f"SELECT * FROM seasons WHERE is_active = %s;"
+    params = (is_active,)
+    result = execute_query(query, params, fetch='one')
+    return result
+
