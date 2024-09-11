@@ -119,3 +119,18 @@ def get_all_appeals_query() -> list:
     else:
         print("No appeals found.")
     return result
+
+
+def search_appeal(appeal_id: int):
+    """
+    Search for appeal in the appeal table.
+    """
+    query = "SELECT * FROM appeal WHERE id LIKE %s;"
+    result = execute_query(query, params=("%" + appeal_id + "%",), fetch="all")
+    if result:
+        print("appeal:")
+        for appeal in result:
+           appeal_printer(appeal=appeal)
+    else:
+        print("No appeal found.")
+    return None
