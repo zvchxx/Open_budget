@@ -82,3 +82,19 @@ def update_category_query(category_id: int, name: str, status: bool) -> None:
     execute_query(query, params)
     return None
 
+
+def delete_category_query(category_id: int) -> None:
+    """
+    Deletes a category from the database.
+
+    Args:
+        category_id (int): The ID of the category to delete.
+
+    Returns:
+        None.
+    """
+    query = "Delete categorys WHERE id = %s;"
+    params = ( category_id,)
+    execute_query(query, params)
+    return None
+
