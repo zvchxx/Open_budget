@@ -15,3 +15,19 @@ def create_regions_table_query() -> None:
     );
     """)
     return None
+
+
+def get_region_from_id_query(region_id: int) -> DictRow:
+    """
+    Retrieves a region from the database by its ID.
+
+    Args:
+        region_id (int): The ID of the region to retrieve.
+
+    Returns:
+        DictRow: The retrieved region.
+    """
+    query = f"SELECT * FROM regions WHERE id = %s AND status = %s;"
+    params = (region_id, True)
+    result = execute_query(query, params, fetch='one')
+    return result
