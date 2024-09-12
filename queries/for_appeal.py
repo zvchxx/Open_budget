@@ -3,7 +3,10 @@ from psycopg2.extras import DictRow
 from database_config.db_settings import execute_query
 from utils.printer import appeal_printer
 
+from log.logs import log_decorator
 
+
+@log_decorator
 def create_appeals_table_query() -> None:
     """
     Creates a table for storing appeals.
@@ -22,6 +25,7 @@ def create_appeals_table_query() -> None:
     return None
 
 
+@log_decorator
 def get_appeal_from_id_query(appeal_id: int) -> DictRow:
     """
     Retrieves a appeal from the database by its ID.
@@ -38,6 +42,7 @@ def get_appeal_from_id_query(appeal_id: int) -> DictRow:
     return result
 
 
+@log_decorator
 def get_appeal_from_is_active_query(is_active: bool) -> DictRow:
     """
     Retrieves a appeal from the database by its name.
@@ -54,6 +59,7 @@ def get_appeal_from_is_active_query(is_active: bool) -> DictRow:
     return result
 
 
+@log_decorator
 def insert_appeal_query(start_date: str, end_date: str, is_active: bool, season_id: int, total_appeals: str, status: bool) -> None:
     """
     Inserts a new appeal into the database.
@@ -70,6 +76,7 @@ def insert_appeal_query(start_date: str, end_date: str, is_active: bool, season_
     return None
 
 
+@log_decorator
 def update_appeal_query(appeal_id: int, start_date: str, end_date: str, is_active: bool, season_id: int, total_appeals: str, status: bool) -> None:
     """
     Updates a appeal's name in the database.
@@ -87,6 +94,7 @@ def update_appeal_query(appeal_id: int, start_date: str, end_date: str, is_activ
     return None
 
 
+@log_decorator
 def delete_appeal_query(appeal_id: int) -> None:
     """
     Deletes a appeal from the database.
@@ -103,6 +111,7 @@ def delete_appeal_query(appeal_id: int) -> None:
     return None
 
 
+@log_decorator
 def get_all_appeals_query() -> list:
     """
     Retrieves all appeals from the database.
@@ -121,6 +130,7 @@ def get_all_appeals_query() -> list:
     return result
 
 
+@log_decorator
 def search_appeal(appeal_id: int):
     """
     Search for appeal in the appeal table.

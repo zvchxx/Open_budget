@@ -1,9 +1,13 @@
 from psycopg2.extras import DictRow
 
 from database_config.db_settings import execute_query
+
+from log.logs import log_decorator
+
 from utils.printer import voice_printer
 
 
+@log_decorator
 def create_voices_table_query() -> None:
     """
     Creates a table for storing voices.
@@ -19,6 +23,7 @@ def create_voices_table_query() -> None:
     return None
 
 
+@log_decorator
 def get_voice_from_id_query(voice_id: int) -> DictRow:
     """
     Retrieves a voice from the database by its ID.
@@ -35,6 +40,7 @@ def get_voice_from_id_query(voice_id: int) -> DictRow:
     return result
 
 
+@log_decorator
 def get_voice_from_is_user_id_query(user_id: int) -> DictRow:
     """
     Retrieves a voice from the database by its name.
@@ -51,6 +57,7 @@ def get_voice_from_is_user_id_query(user_id: int) -> DictRow:
     return result
 
 
+@log_decorator
 def insert_voice_query(vote_id: int, petition_id: int, user_id: int) -> None:
     """
     Inserts a new voice into the database.
@@ -67,6 +74,7 @@ def insert_voice_query(vote_id: int, petition_id: int, user_id: int) -> None:
     return None
 
 
+@log_decorator
 def update_voice_query(voice_id: int, vote_id: int, petition_id: int, user_id: int) -> None:
     """
     Updates a voice's name in the database.
@@ -84,6 +92,7 @@ def update_voice_query(voice_id: int, vote_id: int, petition_id: int, user_id: i
     return None
 
 
+@log_decorator
 def delete_voice_query(voice_id: int) -> None:
     """
     Deletes a voice from the database.
@@ -100,6 +109,7 @@ def delete_voice_query(voice_id: int) -> None:
     return None
 
 
+@log_decorator
 def get_all_voices_query() -> list:
     """
     Retrieves all voices from the database.
@@ -118,6 +128,7 @@ def get_all_voices_query() -> list:
     return result
 
 
+@log_decorator
 def search_voice(voice_id: int):
     """
     Search for voice in the voice table.

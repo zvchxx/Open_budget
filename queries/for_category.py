@@ -3,7 +3,10 @@ from psycopg2.extras import DictRow
 from database_config.db_settings import execute_query
 from utils.printer import category_printer
 
+from log.logs import log_decorator
 
+
+@log_decorator
 def create_categorys_table_query() -> None:
     """
     Creates a table for storing categorys.
@@ -18,6 +21,7 @@ def create_categorys_table_query() -> None:
     return None
 
 
+@log_decorator
 def get_category_from_id_query(category_id: int) -> DictRow:
     """
     Retrieves a category from the database by its ID.
@@ -34,6 +38,7 @@ def get_category_from_id_query(category_id: int) -> DictRow:
     return result
 
 
+@log_decorator
 def get_category_from_name_query(name: str) -> DictRow:
     """
     Retrieves a category from the database by its name.
@@ -50,6 +55,7 @@ def get_category_from_name_query(name: str) -> DictRow:
     return result
 
 
+@log_decorator
 def insert_category_query(name: str, status: bool) -> None:
     """
     Inserts a new category into the database.
@@ -66,6 +72,7 @@ def insert_category_query(name: str, status: bool) -> None:
     return None
 
 
+@log_decorator
 def update_category_query(category_id: int, name: str, status: bool) -> None:
     """
     Updates a category's name in the database.
@@ -83,6 +90,7 @@ def update_category_query(category_id: int, name: str, status: bool) -> None:
     return None
 
 
+@log_decorator
 def delete_category_query(category_id: int) -> None:
     """
     Deletes a category from the database.
@@ -99,6 +107,7 @@ def delete_category_query(category_id: int) -> None:
     return None
 
 
+@log_decorator
 def get_all_categorys_query() -> list:
     """
     Retrieves all categorys from the database.
@@ -117,6 +126,7 @@ def get_all_categorys_query() -> list:
     return result
 
 
+@log_decorator
 def search_category(category_id: int):
     """
     Search for category in the category table.

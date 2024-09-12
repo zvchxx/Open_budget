@@ -2,6 +2,8 @@ import os
 
 from database_config.db_settings import execute_query
 
+from log.logs import log_decorator
+
 from .for_user import create_users_table_query
 from .for_season import create_seasons_table_query
 from .for_appeal import create_appeals_table_query
@@ -13,6 +15,7 @@ from .for_voice import create_voices_table_query
 from .for_vote import create_votes_table_query
 
 
+@log_decorator
 def create_is_used_table_query() -> None:
     """
     Creates a new table for tracking whether the application is already run.
@@ -27,6 +30,7 @@ def create_is_used_table_query() -> None:
     return None
 
 
+@log_decorator
 def insert_is_used_query():
     """
     Inserts a new record into the is_used table.
@@ -43,6 +47,7 @@ def insert_is_used_query():
     return None
 
 
+@log_decorator
 def update_is_used_query():
     """
     Updates the is_used column in the is_used table.
@@ -52,6 +57,7 @@ def update_is_used_query():
     return None
 
 
+@log_decorator
 def is_used():
     query = """
     SELECT * FROM is_used
@@ -62,6 +68,7 @@ def is_used():
     return data['is_used'] is True
 
 
+@log_decorator
 def before_run() -> None:
     """
     Creates all required tables before running the application.
@@ -79,6 +86,7 @@ def before_run() -> None:
     return None
 
 
+@log_decorator
 def if_not_used():
     path = os.path.join(os.path.dirname(__file__),)
     create_is_used_table_query()

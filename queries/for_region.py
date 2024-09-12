@@ -1,9 +1,13 @@
 from psycopg2.extras import DictRow
 
 from database_config.db_settings import execute_query
+
+from log.logs import log_decorator
 from utils.printer import region_printer
 
 
+
+@log_decorator
 def create_regions_table_query() -> None:
     """
     Creates a table for storing regions.
@@ -17,6 +21,7 @@ def create_regions_table_query() -> None:
     return None
 
 
+@log_decorator
 def get_region_from_id_query(region_id: int) -> DictRow:
     """
     Retrieves a region from the database by its ID.
@@ -33,6 +38,7 @@ def get_region_from_id_query(region_id: int) -> DictRow:
     return result
 
 
+@log_decorator
 def get_region_from_name_query(name: str) -> DictRow:
     """
     Retrieves a region from the database by its name.
@@ -49,6 +55,7 @@ def get_region_from_name_query(name: str) -> DictRow:
     return result
 
 
+@log_decorator
 def insert_region_query(name: str) -> None:
     """
     Inserts a new region into the database.
@@ -65,6 +72,7 @@ def insert_region_query(name: str) -> None:
     return None
 
 
+@log_decorator
 def update_region_query(region_id: int, name: str) -> None:
     """
     Updates a region's name in the database.
@@ -82,6 +90,7 @@ def update_region_query(region_id: int, name: str) -> None:
     return None
 
 
+@log_decorator
 def delete_region_query(region_id: int) -> None:
     """
     Deletes a region from the database.
@@ -98,6 +107,7 @@ def delete_region_query(region_id: int) -> None:
     return None
 
 
+@log_decorator
 def get_all_regions_query() -> list:
     """
     Retrieves all regions from the database.
@@ -116,6 +126,7 @@ def get_all_regions_query() -> list:
     return result
 
 
+@log_decorator
 def search_region(region_id: int):
     """
     Search for region in the region table.

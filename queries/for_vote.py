@@ -1,9 +1,13 @@
 from psycopg2.extras import DictRow
 
 from database_config.db_settings import execute_query
+
+from log.logs import log_decorator
+
 from utils.printer import vote_printer
 
 
+@log_decorator
 def create_votes_table_query() -> None:
     """
     Creates a table for storing votes.
@@ -22,6 +26,7 @@ def create_votes_table_query() -> None:
     return None
 
 
+@log_decorator
 def get_vote_from_id_query(vote_id: int) -> DictRow:
     """
     Retrieves a vote from the database by its ID.
@@ -38,6 +43,7 @@ def get_vote_from_id_query(vote_id: int) -> DictRow:
     return result
 
 
+@log_decorator
 def get_vote_from_is_active_query(is_active: bool) -> DictRow:
     """
     Retrieves a vote from the database by its name.
@@ -54,6 +60,7 @@ def get_vote_from_is_active_query(is_active: bool) -> DictRow:
     return result
 
 
+@log_decorator
 def insert_vote_query(start_date: str, end_date: str, is_active: bool, season_id: int, is_email: str,
                         status: bool) -> None:
     """
@@ -72,6 +79,7 @@ def insert_vote_query(start_date: str, end_date: str, is_active: bool, season_id
     return None
 
 
+@log_decorator
 def update_vote_query(vote_id: int, start_date: str, end_date: str, is_active: bool, season_id: int, is_email: str,
                         status: bool) -> None:
     """
@@ -91,6 +99,7 @@ def update_vote_query(vote_id: int, start_date: str, end_date: str, is_active: b
     return None
 
 
+@log_decorator
 def delete_vote_query(vote_id: int) -> None:
     """
     Deletes a vote from the database.
@@ -107,6 +116,7 @@ def delete_vote_query(vote_id: int) -> None:
     return None
 
 
+@log_decorator
 def get_all_votes_query() -> list:
     """
     Retrieves all votes from the database.
@@ -125,6 +135,7 @@ def get_all_votes_query() -> list:
     return result
 
 
+@log_decorator
 def search_vote(vote_id: int):
     """
     Search for vote in the vote table.

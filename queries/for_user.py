@@ -2,9 +2,12 @@ from psycopg2.extras import DictRow
 
 from database_config.db_settings import execute_query
 
+from log.logs import log_decorator
+
 from utils.printer import user_printer
 
 
+@log_decorator
 def create_users_table_query() -> None:
     """
     Creates a query for creating a table for storing users.
@@ -22,6 +25,7 @@ def create_users_table_query() -> None:
     return None
 
 
+@log_decorator
 def get_user_from_id_query(user_id: int) -> DictRow:
     """
     Creates a query for retrieving a user by their ID from the database.
@@ -38,6 +42,7 @@ def get_user_from_id_query(user_id: int) -> DictRow:
     return result
 
 
+@log_decorator
 def get_user_from_email_query(email: str) -> DictRow:
     """
     Creates a query for retrieving a user by their email from the database.
@@ -54,6 +59,7 @@ def get_user_from_email_query(email: str) -> DictRow:
     return result
 
 
+@log_decorator
 def insert_user_query(email: str, password: str, first_name: str, last_name: str) -> None:
     """
     Creates a query for inserting a new user into the database.
@@ -73,6 +79,7 @@ def insert_user_query(email: str, password: str, first_name: str, last_name: str
     return None
 
 
+@log_decorator
 def update_user_query(user_id: int, email: str, password: str, first_name: str, last_name: str) -> None:
     """
     Creates a query for updating a user's information in the database.
@@ -94,6 +101,7 @@ def update_user_query(user_id: int, email: str, password: str, first_name: str, 
     return None
 
 
+@log_decorator
 def delete_user_query(user_id: int) -> None:
     """
     Creates a query for deleting a user from the database.
@@ -107,6 +115,7 @@ def delete_user_query(user_id: int) -> None:
     return None
 
 
+@log_decorator
 def get_all_users_query() -> list:
     """
     Creates a query for retrieving all users from the database.
@@ -125,6 +134,7 @@ def get_all_users_query() -> list:
     return None
 
 
+@log_decorator
 def get_users_by_role_query(role_id: int) -> list:
     """
     Creates a query for retrieving users by their role ID from the database.
@@ -141,6 +151,7 @@ def get_users_by_role_query(role_id: int) -> list:
     return result
 
 
+@log_decorator
 def search_user(user_id: int):
     """
     Search for user in the user table.

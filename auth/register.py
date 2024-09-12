@@ -2,7 +2,10 @@ from queries.for_user import insert_user_query
 
 from utils import additions
 
+from log.logs import log_decorator
 
+
+@log_decorator
 def register():
     """
     Handles the registration process for a new user.

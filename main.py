@@ -4,6 +4,8 @@ from auth.login import login
 
 from auth.register import register
 
+from log.logs import log_settings
+
 
 def after_login(email: str, status: str):
     """
@@ -45,3 +47,4 @@ def auth_menu():
 if __name__ == "__main__":
     if_not_used()
     auth_menu()
+    log_settings()

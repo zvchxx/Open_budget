@@ -1,9 +1,13 @@
 from psycopg2.extras import DictRow
 
 from database_config.db_settings import execute_query
+
+from log.logs import log_decorator
+
 from utils.printer import city_printer
 
 
+@log_decorator
 def create_citys_table_query() -> None:
     """
     Creates a table for storing citys.
@@ -18,6 +22,7 @@ def create_citys_table_query() -> None:
     return None
 
 
+@log_decorator
 def get__city_id_query(city_id: int) -> DictRow:
     """
     Retrieves a city from the database by its ID.
@@ -34,6 +39,7 @@ def get__city_id_query(city_id: int) -> DictRow:
     return result
 
 
+@log_decorator
 def get_city_from_name_query(name: str) -> DictRow:
     """
     Retrieves a city from the database by its name.
@@ -50,6 +56,7 @@ def get_city_from_name_query(name: str) -> DictRow:
     return result
 
 
+@log_decorator
 def insert_city_query(name: str, region_id: int) -> None:
     """
     Inserts a new city into the database.
@@ -66,6 +73,7 @@ def insert_city_query(name: str, region_id: int) -> None:
     return None
 
 
+@log_decorator
 def update_city_query(city_id: int, name: str, region_id: int) -> None:
     """
     Updates a city's name in the database.
@@ -83,6 +91,7 @@ def update_city_query(city_id: int, name: str, region_id: int) -> None:
     return None
 
 
+@log_decorator
 def delete_city_query(city_id: int) -> None:
     """
     Deletes a city from the database.
@@ -99,6 +108,7 @@ def delete_city_query(city_id: int) -> None:
     return None
 
 
+@log_decorator
 def get_all_citys_query() -> list:
     """
     Retrieves all citys from the database.
@@ -117,6 +127,7 @@ def get_all_citys_query() -> list:
     return result
 
 
+@log_decorator
 def search_city(city_id: int):
     """
     Search for city in the city table.
