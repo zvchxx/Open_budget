@@ -13,7 +13,6 @@ def admin_menu(email: str):
 
     if choice == '1':
         season_menu()
-        pass
 
     elif choice == '2':
         # remove_manager(email)
