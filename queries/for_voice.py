@@ -83,3 +83,18 @@ def update_voice_query(voice_id: int, vote_id: int, petition_id: int, user_id: i
     execute_query(query, params)
     return None
 
+
+def delete_voice_query(voice_id: int) -> None:
+    """
+    Deletes a voice from the database.
+
+    Args:
+        voice_id (int): The ID of the voice to delete.
+
+    Returns:
+        None.
+    """
+    query = "Delete voices WHERE id = %s;"
+    params = ( voice_id,)
+    execute_query(query, params)
+    return None
