@@ -52,3 +52,21 @@ def get_vote_from_is_active_query(is_active: bool) -> DictRow:
     params = (is_active,)
     result = execute_query(query, params, fetch='one')
     return result
+
+
+def insert_vote_query(start_date: str, end_date: str, is_active: bool, season_id: int, is_email: str,
+                        status: bool) -> None:
+    """
+    Inserts a new vote into the database.
+
+    Args:
+        name (str): The name of the new vote.
+
+    Returns:
+        None.
+    """
+    query = """INSERT INTO votes (start_date, end_date, is_active, season_id, is_email,
+                        status) VALUES (%s, %s, %s, %s, %s, %s);"""
+    params = (start_date, end_date, is_active, season_id, is_email, status,)
+    execute_query(query, params)
+    return None
