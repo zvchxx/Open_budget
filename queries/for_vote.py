@@ -124,3 +124,17 @@ def get_all_votes_query() -> list:
         print("No votes found.")
     return result
 
+
+def search_vote(vote_id: int):
+    """
+    Search for vote in the vote table.
+    """
+    query = "SELECT * FROM vote WHERE id LIKE %s;"
+    result = execute_query(query, params=("%" + vote_id + "%",), fetch="all")
+    if result:
+        print("vote:")
+        for vote in result:
+           vote_printer(vote=vote)
+    else:
+        print("No vote found.")
+    return None
