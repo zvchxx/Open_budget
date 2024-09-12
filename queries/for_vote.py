@@ -105,3 +105,22 @@ def delete_vote_query(vote_id: int) -> None:
     params = ( vote_id,)
     execute_query(query, params)
     return None
+
+
+def get_all_votes_query() -> list:
+    """
+    Retrieves all votes from the database.
+
+    Returns:
+        List[DictRow]: The retrieved votes.
+    """
+    query = "SELECT * FROM votes;"
+    result = execute_query(query, fetch='all')
+    if result:
+        print("votes:")
+        for vote in result:
+           vote_printer(vote=vote)
+    else:
+        print("No votes found.")
+    return result
+
