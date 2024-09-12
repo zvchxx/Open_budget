@@ -90,3 +90,18 @@ def update_vote_query(vote_id: int, start_date: str, end_date: str, is_active: b
     execute_query(query, params)
     return None
 
+
+def delete_vote_query(vote_id: int) -> None:
+    """
+    Deletes a vote from the database.
+
+    Args:
+        vote_id (int): The ID of the vote to delete.
+
+    Returns:
+        None.
+    """
+    query = "Delete votes WHERE id = %s;"
+    params = ( vote_id,)
+    execute_query(query, params)
+    return None
