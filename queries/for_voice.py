@@ -66,3 +66,20 @@ def insert_voice_query(vote_id: int, petition_id: int, user_id: int) -> None:
     execute_query(query, params)
     return None
 
+
+def update_voice_query(voice_id: int, vote_id: int, petition_id: int, user_id: int) -> None:
+    """
+    Updates a voice's name in the database.
+
+    Args:
+        voice_id (int): The ID of the voice to update.
+        name (str): The new name of the voice.
+
+    Returns:
+        None.
+    """
+    query = """UPDATE voices SET vote_id = %s, petition_id = %s, user_id = %s WHERE id = %s;"""
+    params = (vote_id, petition_id, user_id, voice_id,)
+    execute_query(query, params)
+    return None
+
