@@ -21,7 +21,7 @@ def create_petitions_table_query() -> None:
         category_id BIGINT REFERENCES categorys(id) UNIQUE NOT NULL,
         total_voices BIGINT NOT NULL,
         status BOOLEAN NOT NULL,
-        user_id BIGINT REFERENCES users(id) UNIQUE NOT NULL,    
+        user_id BIGINT REFERENCES users(id) UNIQUE NOT NULL
     );
     """)
     return None
@@ -96,7 +96,7 @@ def update_petition_query(petition_id: int, title: str, content: str, money: str
     """
     query = """UPDATE petitions SET title = %s, content = %s, money = %s, city_id = %s, is_winner = %s,
                 is_accepted = %s, appeal_id = %s, category_id = %s, total_voices = %s,
-                status = %s, user_id = %s, WHERE id = %s;"""
+                status = %s, user_id = %s WHERE id = %s;"""
     params = (title, content, money, city_id, is_winner,
                 is_accepted, appeal_id, category_id, total_voices,
                 status, user_id, petition_id,)
