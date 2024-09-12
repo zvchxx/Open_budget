@@ -1,11 +1,13 @@
-from queries.for_user import insert_user_query
+from queries.for_user import get_user_id, insert_user_query
 
 from utils import additions
 
 from log.logs import log_decorator
 
+from utils.printer import user_printer
 
-@log_decorator
+
+@log_decorator  
 def register():
     """
     Handles the registration process for a new user.
@@ -39,7 +41,11 @@ def register():
 
 
     # Create a new user in the database
-    insert_user_query(email=email, password=password, first_name=first_name, last_name=last_name)
+    insert_user_query(email=email, password=password, last_name=last_name, first_name=first_name, status=True)
     print("Congratulations!!!")
+    result = get_user_id()
     print(f"{first_name} {last_name} You Registered Successfully to OpenBudget!")
+    print(f"Your information:\n")
+    for user in result:
+        user_printer(user=user)
     return email
