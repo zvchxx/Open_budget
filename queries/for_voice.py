@@ -98,3 +98,22 @@ def delete_voice_query(voice_id: int) -> None:
     params = ( voice_id,)
     execute_query(query, params)
     return None
+
+
+def get_all_voices_query() -> list:
+    """
+    Retrieves all voices from the database.
+
+    Returns:
+        List[DictRow]: The retrieved voices.
+    """
+    query = "SELECT * FROM voices;"
+    result = execute_query(query, fetch='all')
+    if result:
+        print("voices:")
+        for voice in result:
+           voice_printer(voice=voice)
+    else:
+        print("No voices found.")
+    return result
+
