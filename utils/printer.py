@@ -46,3 +46,9 @@ def vote_printer(vote):
       print(f"""ID: {vote[0]}, Start date: {vote[1]}, End date: {vote[2]}, Is active: {vote[3]},
                   Season ID: {vote[4]}, Is email: {[5]}, Status: {vote[6]}""")
       return None
+
+
+def voice_printer(voice):
+      print(f"""ID: {voice[0]}, Vote ID: {voice[1]}, Petition ID: {voice[2]}, 
+                  User ID: {voice[3]}""")
+      return None
