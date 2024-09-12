@@ -51,3 +51,18 @@ def get_voice_from_is_user_id_query(user_id: int) -> DictRow:
     return result
 
 
+def insert_voice_query(vote_id: int, petition_id: int, user_id: int) -> None:
+    """
+    Inserts a new voice into the database.
+
+    Args:
+        name (str): The name of the new voice.
+
+    Returns:
+        None.
+    """
+    query = """INSERT INTO voices (vote_id, petition_id, user_id) VALUES (%s, %s, %s);"""
+    params = (vote_id, petition_id, user_id,)
+    execute_query(query, params)
+    return None
+
