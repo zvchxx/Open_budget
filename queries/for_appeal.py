@@ -14,9 +14,9 @@ def create_appeals_table_query() -> None:
         start_date TIMESTAMP NOT NULL,
         end_date TIMESTAMP NOT NULL,
         is_active BOOlEAN NOT NULL,
-        season_id BIGINT REFERENCES seasons(id) UNIQUE NOT NULL,
+        season_id BIGINT NOT NULL REFERENCES seasons(id),
         total_appeales BIGINT NOT NULL,
-        status BOOLEAN NOT NULL
+        status BOOLEAN DEFAULT FALSE
     );
     """)
     return None

@@ -12,7 +12,7 @@ def create_categorys_table_query() -> None:
     CREATE TABLE IF NOT EXISTS categorys (
         id BIGSERIAL PRIMARY KEY,
         name VARCHAR(64) NOT NULL UNIQUE,
-        status BOOLEAN NOT NULL
+        status BOOLEAN DEFAULT FALSE
     );
     """)
     return None

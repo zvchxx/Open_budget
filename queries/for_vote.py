@@ -14,9 +14,9 @@ def create_votes_table_query() -> None:
         start_date TIMESTAMP NOT NULL,
         end_date TIMESTAMP NOT NULL,
         is_active BOOlEAN NOT NULL,
-        season_id BIGINT REFERENCES seasons(id) UNIQUE NOT NULL,
-        is_email BIGINIT REFERENCES users(email) UNIQUE NOT NULL
-        status BOOLEAN NOT NULL  
+        season_id BIGINT NOT NULL REFERENCES seasons(id),
+        is_email VARCHAR(128) NOT NULL REFERENCES users(email),
+        status BOOLEAN DEFAULT FALSE
     );
     """)
     return None

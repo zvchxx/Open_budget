@@ -12,7 +12,7 @@ def create_citys_table_query() -> None:
     CREATE TABLE IF NOT EXISTS citys (
         id BIGSERIAL PRIMARY KEY,
         name VARCHAR(64) NOT NULL UNIQUE,
-        region_id BIGINT REFERENCES regions(id) NOT NULL
+        region_id BIGINT NOT NULL REFERENCES regions(id)
     );
     """)
     return None

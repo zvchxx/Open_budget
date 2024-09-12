@@ -14,14 +14,14 @@ def create_petitions_table_query() -> None:
         title VARCHAR(256) NOT NULL,
         content VARCHAR(256) NOT NULL,
         money BIGINT NOT NULL,
-        city_id BIGINT REFERENCES citys(id) UNIQUE NOT NULL,
+        city_id BIGINT NOT NULL REFERENCES citys(id),
         is_winner BOOLEAN NOT NULL,
         is_accepted BOOLEAN NOT NULL,
-        appeal_id BIGINT REFERENCES apeals(id) UNIQUE NOT NULL,
-        category_id BIGINT REFERENCES categorys(id) UNIQUE NOT NULL,
+        appeal_id BIGINT NOT NULL REFERENCES appeals(id),
+        category_id BIGINT NOT NULL REFERENCES categorys(id),
         total_voices BIGINT NOT NULL,
-        status BOOLEAN NOT NULL,
-        user_id BIGINT REFERENCES users(id) UNIQUE NOT NULL
+        status BOOLEAN DEFAULT FALSE,
+        user_id BIGINT NOT NULL REFERENCES users(id)
     );
     """)
     return None

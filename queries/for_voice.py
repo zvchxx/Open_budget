@@ -11,9 +11,9 @@ def create_voices_table_query() -> None:
     execute_query("""
     CREATE TABLE IF NOT EXISTS voices (
         id BIGSERIAL PRIMARY KEY,
-        vote_id BIGINT REFERENCES votes(id) UNIQUE NOT NULL,
-        petition_id BIGINT REFERENCES petitions(id) UNIQUE NOT NULL,
-        user_id BIGINIT REFERENCES users(id) UNIQUE NOT NULL
+        vote_id BIGINT NOT NULL REFERENCES votes(id),
+        petition_id BIGINT NOT NULL REFERENCES petitions(id),
+        user_id BIGINT NOT NULL REFERENCES users(id)
     );
     """)
     return None

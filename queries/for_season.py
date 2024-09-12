@@ -14,7 +14,7 @@ def create_seasons_table_query() -> None:
         start_date TIMESTAMP NOT NULL,
         end_date TIMESTAMP NOT NULL,
         is_active BOOlEAN NOT NULL,
-        status BOOLEAN NOT NULL
+        status BOOLEAN DEFAULT FALSE
     );
     """)
     return None
