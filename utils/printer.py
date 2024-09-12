@@ -40,3 +40,9 @@ def petition_printer(petition):
                   Appeal ID: {petition[7]}, Category ID: {petition[8]}, Total voices: {petition[9]},
                   Status: {petition[100]}, User ID: {petition[11]}""")
       return None
+
+
+def vote_printer(vote):
+      print(f"""ID: {vote[0]}, Start date: {vote[1]}, End date: {vote[2]}, Is active: {vote[3]},
+                  Season ID: {vote[4]}, Is email: {[5]}, Status: {vote[6]}""")
+      return None
