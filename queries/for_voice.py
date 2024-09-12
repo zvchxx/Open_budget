@@ -117,3 +117,17 @@ def get_all_voices_query() -> list:
         print("No voices found.")
     return result
 
+
+def search_voice(voice_id: int):
+    """
+    Search for voice in the voice table.
+    """
+    query = "SELECT * FROM voice WHERE id LIKE %s;"
+    result = execute_query(query, params=("%" + voice_id + "%",), fetch="all")
+    if result:
+        print("voice:")
+        for voice in result:
+           voice_printer(voice=voice)
+    else:
+        print("No voice found.")
+    return None
