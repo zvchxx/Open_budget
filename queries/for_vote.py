@@ -70,3 +70,23 @@ def insert_vote_query(start_date: str, end_date: str, is_active: bool, season_id
     params = (start_date, end_date, is_active, season_id, is_email, status,)
     execute_query(query, params)
     return None
+
+
+def update_vote_query(vote_id: int, start_date: str, end_date: str, is_active: bool, season_id: int, is_email: str,
+                        status: bool) -> None:
+    """
+    Updates a vote's name in the database.
+
+    Args:
+        vote_id (int): The ID of the vote to update.
+        name (str): The new name of the vote.
+
+    Returns:
+        None.
+    """
+    query = """UPDATE votes SET start_date = %s, end_date = %s, is_active = %s, season_id = %s, is_email = %s,
+                        status = %s WHERE id = %s;"""
+    params = (start_date, end_date, is_active, season_id, is_email, status, vote_id,)
+    execute_query(query, params)
+    return None
+
