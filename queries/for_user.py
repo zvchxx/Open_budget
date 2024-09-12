@@ -19,6 +19,7 @@ def create_users_table_query() -> None:
         last_name VARCHAR(64) NOT NULL,
         email VARCHAR(64) NOT NULL UNIQUE,
         password VARCHAR(64) NOT NULL,
+        status BOOLEAN DEFAULT FALSE,
         created_at TIMESTAMPTZ DEFAULT NOW()
     );
     """)
@@ -60,7 +61,7 @@ def get_user_from_email_query(email: str) -> DictRow:
 
 
 @log_decorator
-def insert_user_query(email: str, password: str, first_name: str, last_name: str) -> None:
+def insert_user_query(email: str, password: str, first_name: str, status: bool, last_name: str) -> None:
     """
     Creates a query for inserting a new user into the database.
 
@@ -71,16 +72,16 @@ def insert_user_query(email: str, password: str, first_name: str, last_name: str
         last_name (str): The user's last name.
     """
     query = """
-    INSERT INTO users (email, password, first_name, last_name)
-    VALUES (%s, %s, %s, %s);
+    INSERT INTO users (email, password, first_name, last_name, status)
+    VALUES (%s, %s, %s, %s, %s);
     """
-    params = (email, password, first_name, last_name,)
+    params = (email, password, first_name, last_name, status,)
     execute_query(query, params)
     return None
 
 
 @log_decorator
-def update_user_query(user_id: int, email: str, password: str, first_name: str, last_name: str) -> None:
+def update_user_query(user_id: int, email: str, password: str, first_name: str, last_name: str, status: False) -> None:
     """
     Creates a query for updating a user's information in the database.
 
@@ -93,10 +94,10 @@ def update_user_query(user_id: int, email: str, password: str, first_name: str, 
     """
     query = """
     UPDATE users
-    SET email = %s, password = %s, first_name = %s, last_name = %s
+    SET email = %s, password = %s, first_name = %s, last_name = %s, status = %s
     WHERE id = %s;
     """
-    params = (email, password, first_name, last_name, user_id,)
+    params = (email, password, first_name, last_name, status, user_id,)
     execute_query(query, params)
     return None
 
@@ -134,20 +135,10 @@ def get_all_users_query() -> list:
     return None
 
 
-@log_decorator
-def get_users_by_role_query(role_id: int) -> list:
-    """
-    Creates a query for retrieving users by their role ID from the database.
+def get_user_id():
+    query = "SELECT * FROM users WHERE status = True;"
+    result = execute_query(query, fetch='all')
 
-    Args:
-        role_id (int): The ID of the user's role.
-
-    Returns:
-        List[DictRow]: The retrieved users.
-    """
-    query = "SELECT * FROM users WHERE role_id = %s;"
-    params = (role_id,)
-    result = execute_query(query, params, fetch='all')
     return result
 
 

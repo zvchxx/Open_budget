@@ -14,11 +14,9 @@ def create_appeals_table_query() -> None:
     execute_query("""
     CREATE TABLE IF NOT EXISTS appeals (
         id BIGSERIAL PRIMARY KEY,
-        start_date TIMESTAMP NOT NULL,
-        end_date TIMESTAMP NOT NULL,
+        user_id INTEGER NOT NULL REFERENCES users(id),
         is_active BOOlEAN NOT NULL,
-        season_id BIGINT NOT NULL REFERENCES seasons(id),
-        total_appeales BIGINT NOT NULL,
+        is_information VARCHAR(256) NOT NULL,
         status BOOLEAN DEFAULT FALSE
     );
     """)
@@ -60,7 +58,7 @@ def get_appeal_from_is_active_query(is_active: bool) -> DictRow:
 
 
 @log_decorator
-def insert_appeal_query(start_date: str, end_date: str, is_active: bool, season_id: int, total_appeals: str, status: bool) -> None:
+def insert_appeal_query(is_active: bool, user_id: int, is_information: str, status: bool) -> None:
     """
     Inserts a new appeal into the database.
 
@@ -70,14 +68,14 @@ def insert_appeal_query(start_date: str, end_date: str, is_active: bool, season_
     Returns:
         None.
     """
-    query = "INSERT INTO appeals (start_date, end_date, is_active, season_id, total_appeals, status) VALUES (%s, %s, %s, %s, %s, %s);"
-    params = (start_date, end_date, is_active, season_id, total_appeals, status,)
+    query = "INSERT INTO appeals (user_id, is_active, is_information, status) VALUES (%s, %s, %s, %s);"
+    params = (user_id,  is_active, is_information, status,)
     execute_query(query, params)
     return None
 
 
 @log_decorator
-def update_appeal_query(appeal_id: int, start_date: str, end_date: str, is_active: bool, season_id: int, total_appeals: str, status: bool) -> None:
+def update_appeal_query(appeal_id: int, is_active: bool, user_id: int, is_information: str, status: bool) -> None:
     """
     Updates a appeal's name in the database.
 
@@ -88,8 +86,8 @@ def update_appeal_query(appeal_id: int, start_date: str, end_date: str, is_activ
     Returns:
         None.
     """
-    query = "UPDATE appeals SET start_date = %s, end_date = %s, is_active = %s, season_id = %s, total_appeals = %s, status = %s WHERE id = %s;"
-    params = (start_date, end_date, is_active, season_id, total_appeals, status, appeal_id,)
+    query = "UPDATE appeals SET is_active = %s, user_id = %s, is_information = %s, status = %s WHERE id = %s;"
+    params = (is_active, user_id, is_information, status, appeal_id,)
     execute_query(query, params)
     return None
 
@@ -102,10 +100,8 @@ def delete_appeal_query(appeal_id: int) -> None:
     Args:
         appeal_id (int): The ID of the appeal to delete.
 
-    Returns:
-        None.
     """
-    query = "Delete appeals WHERE id = %s;"
+    query = "DELETE FROM appeals WHERE id = %s;"
     params = ( appeal_id,)
     execute_query(query, params)
     return None
@@ -122,11 +118,32 @@ def get_all_appeals_query() -> list:
     query = "SELECT * FROM appeals;"
     result = execute_query(query, fetch='all')
     if result:
-        print("appeals:")
+        print("Appeals:")
         for appeal in result:
            appeal_printer(appeal=appeal)
     else:
         print("No appeals found.")
+    return result
+
+
+def get_appeals_is_active():
+    query = "SELECT is_active FROM appeals WHERE is_active = True LIMIT 1;"
+    result = execute_query(query, fetch='one')
+    
+    active_status = False
+
+    if result is not None:
+        active_status = True
+    
+    return active_status
+
+
+def get_appeal_id(user_id: int):
+    query = "SELECT * FROM appeals WHERE user_id = user_id;"
+    params = (user_id,) 
+
+    result = execute_query(query, params=params, fetch='all')
+
     return result
 
 
@@ -135,10 +152,11 @@ def search_appeal(appeal_id: int):
     """
     Search for appeal in the appeal table.
     """
-    query = "SELECT * FROM appeal WHERE id LIKE %s;"
-    result = execute_query(query, params=("%" + appeal_id + "%",), fetch="all")
+    query = "SELECT * FROM appeals WHERE id = %s;"
+    params = (appeal_id,)
+    result = execute_query(query, params=params, fetch="all")
     if result:
-        print("appeal:")
+        print("\nAppeals:")
         for appeal in result:
            appeal_printer(appeal=appeal)
     else:
