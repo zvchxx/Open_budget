@@ -1,7 +1,7 @@
 def user_printer(user):
       print(f"""ID: {user[0]}, First name: {user[1]}, Last name: {user[2]}, 
-                  Email: {user[3]}, Password: {user[4]}, Role ID: {user[5]},
-                  Create at: {user[4]}""")
+Email: {user[3]}, Password: {user[4]}, Status: {user[5]},
+Create at: {user[6]}""")
       return None
 
 
@@ -22,33 +22,32 @@ def category_printer(category):
 
 def season_printer(season):
       print(f"""ID: {season[0]}, Start date: {season[1]}, 
-                  End date: {season[2]}, Is active: {season[3]}, Status: {season[4]}""")
+End date: {season[2]}, Is active: {season[3]}, Status: {season[4]}""")
       return None
 
 
 def appeal_printer(appeal):
-      print(f"""ID: {appeal[0]}, Start date: {appeal[1]}, 
-                  End date: {appeal[2]}, Is active: {appeal[3]}, Season ID {[4]},
-                  Total appeals{[5]}, Status: {appeal[6]}""")
+      print(f"""ID: {appeal[0]}, User ID: {appeal[1]}, Is active: {appeal[2]},
+Information: {[3]}, Status: {appeal[4]}""")
       return None
 
 
 def petition_printer(petition):
       print(f"""ID: {petition[0]}, Title: {petition[1]}, 
-                  Content: {petition[2]}, Money: {petition[3]}, 
-                  City ID: {petition[4]}, Is winner: {petition[5]}, Is accepted: {petition[6]},
-                  Appeal ID: {petition[7]}, Category ID: {petition[8]}, Total voices: {petition[9]},
-                  Status: {petition[100]}, User ID: {petition[11]}""")
+Content: {petition[2]}, Money: {petition[3]}, 
+City ID: {petition[4]}, Is winner: {petition[5]}, Is accepted: {petition[6]},
+Appeal ID: {petition[7]}, Category ID: {petition[8]}, Total voices: {petition[9]},
+Status: {petition[100]}, User ID: {petition[11]}""")
       return None
 
 
 def vote_printer(vote):
       print(f"""ID: {vote[0]}, Start date: {vote[1]}, End date: {vote[2]}, Is active: {vote[3]},
-                  Season ID: {vote[4]}, Is email: {[5]}, Status: {vote[6]}""")
+Season ID: {vote[4]}, Is email: {[5]}, Status: {vote[6]}""")
       return None
 
 
 def voice_printer(voice):
       print(f"""ID: {voice[0]}, Vote ID: {voice[1]}, Petition ID: {voice[2]}, 
-                  User ID: {voice[3]}""")
+User ID: {voice[3]}""")
       return None
