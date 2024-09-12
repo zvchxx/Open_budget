@@ -21,3 +21,34 @@ def create_votes_table_query() -> None:
     """)
     return None
 
+
+def get_vote_from_id_query(vote_id: int) -> DictRow:
+    """
+    Retrieves a vote from the database by its ID.
+
+    Args:
+        vote_id (int): The ID of the vote to retrieve.
+
+    Returns:
+        DictRow: The retrieved vote.
+    """
+    query = f"SELECT * FROM votes WHERE id = %s;"
+    params = (vote_id,)
+    result = execute_query(query, params, fetch='one')
+    return result
+
+
+def get_vote_from_is_active_query(is_active: bool) -> DictRow:
+    """
+    Retrieves a vote from the database by its name.
+
+    Args:
+        name (str): The name of the vote to retrieve.
+
+    Returns:
+        DictRow: The retrieved vote.
+    """
+    query = f"SELECT * FROM votes WHERE is_active = %s;"
+    params = (is_active,)
+    result = execute_query(query, params, fetch='one')
+    return result
