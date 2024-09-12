@@ -18,3 +18,36 @@ def create_voices_table_query() -> None:
     """)
     return None
 
+
+def get_voice_from_id_query(voice_id: int) -> DictRow:
+    """
+    Retrieves a voice from the database by its ID.
+
+    Args:
+        voice_id (int): The ID of the voice to retrieve.
+
+    Returns:
+        DictRow: The retrieved voice.
+    """
+    query = f"SELECT * FROM voices WHERE id = %s;"
+    params = (voice_id,)
+    result = execute_query(query, params, fetch='one')
+    return result
+
+
+def get_voice_from_is_user_id_query(user_id: int) -> DictRow:
+    """
+    Retrieves a voice from the database by its name.
+
+    Args:
+        name (str): The name of the voice to retrieve.
+
+    Returns:
+        DictRow: The retrieved voice.
+    """
+    query = f"SELECT * FROM voices WHERE user_id = %s;"
+    params = (user_id,)
+    result = execute_query(query, params, fetch='one')
+    return result
+
+
