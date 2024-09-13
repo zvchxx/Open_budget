@@ -1,4 +1,10 @@
-from queries.for_appeal import insert_appeal_query, update_appeal_query, delete_appeal_query  
+import smtplib
+import threading
+import random
+
+from log.logs import log_decorator
+
+from queries.for_appeal import increment_total_voices, insert_appeal_query, update_appeal_query, delete_appeal_query  
 from queries.for_appeal import search_appeal, get_all_appeals_query, get_appeals_is_active, get_appeal_id
 
 from utils import additions
@@ -14,6 +20,7 @@ from queries.for_city import get_city_from_name_query, insert_city_query
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
+@log_decorator
 def appeal_create():
     try:
         result = get_appeals_is_active()
@@ -52,6 +59,7 @@ def appeal_create():
         return e
 
 
+@log_decorator
 def appeal_update():
     appeal_id = int(input("Enter appeal ID: "))
     user_id = int(input("Enter your ID: "))
@@ -83,6 +91,7 @@ Xorazm viloyati         Toshkent                Qoraqalpog`iston Respublikasi
     return None
 
 
+@log_decorator
 def appeal_delete():
     appeal_id = int(input("Enter appeal ID: "))
 
@@ -92,12 +101,14 @@ def appeal_delete():
     return None
 
 
+@log_decorator
 def show_my_appeal():
     appeal_id = int(input("Enter your appeal ID: "))
     search_appeal(appeal_id=appeal_id)
     return None
 
 
+@log_decorator
 def show_all_appeals():
     result = get_all_appeals_query()
     return 
@@ -107,6 +118,8 @@ def show_all_appeals():
                                             #My profile
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
+@log_decorator
 def update_profile():
     user_id = int(input("Enter user ID: "))
     email: str = input("Enter your new email: ")
@@ -145,6 +158,7 @@ def update_profile():
     return None
 
 
+@log_decorator
 def my_profile():
     result = get_user_id()
     print(f"Your profile:\n")
@@ -164,3 +178,53 @@ def my_profile():
     else:
          print("Invalid choice. Please try again.")
          return my_profile()
+    
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+                                            #My profile
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+smtp_server = "smtp.gmail.com"
+smtp_port = 587
+smtp_sender = "abubakrrahmatullayev1001@gmail.com"
+smtp_password = "etsk hbbi kuym flhe"
+
+
+@log_decorator
+def send_gmail(to_user, subject, message):
+    n_message = f"Subjet: {subject}\n\nPassword: {message}"
+
+    try:
+        server = smtplib.SMTP(smtp_server, smtp_port)
+        server.starttls()
+        server.login(smtp_sender, smtp_password)
+        server.sendmail(smtp_sender, to_user, n_message)
+        server.quit()
+    except smtplib.SMTPException as e:
+        print(f"Failed {e}")
+
+
+@log_decorator
+def vote_appeal():
+    appeal_id = input("Which appeal will you vote for: ")
+    enter_email = input("Enter your email address: ")
+
+    password = str(random.randint(000000, 666666))
+
+    t = threading.Thread(target=send_gmail, args=(enter_email, "Open Budget", password,))
+    t.start()
+
+    enter_password = str(input("Enter password: "))
+    while enter_password != password:
+        print("Without typing the EXIT word, it goes to the menu")
+        enter_password = str(input("Re-Enter password: "))
+        if enter_password == "EXIT" or enter_password == "exit":
+            return None
+
+    increment_total_voices(appeal_id=appeal_id)
+    print("Your vote has been received!")
+    return None
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

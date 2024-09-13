@@ -1,6 +1,6 @@
 from auth.login import logout
 
-from .user_func import appeal_delete, appeal_create, appeal_update, my_profile, show_my_appeal, show_all_appeals
+from .user_func import appeal_delete, appeal_create, appeal_update, my_profile, show_my_appeal, show_all_appeals, vote_appeal
 
 
 def user_menu():
@@ -21,7 +21,8 @@ def user_menu():
         show_my_appeal()
         return user_menu()
     elif choice == '3':
-        pass
+        vote_appeal()
+        return user_menu()
     elif choice == '4':
         my_profile()
         return user_menu()
