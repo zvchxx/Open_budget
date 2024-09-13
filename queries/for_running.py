@@ -9,8 +9,6 @@ from .for_season import create_seasons_table_query
 from .for_appeal import create_appeals_table_query
 from .for_city import create_citys_table_query
 from .for_region import create_regions_table_query
-from .for_category import create_categorys_table_query
-from .for_petition import create_petitions_table_query
 from .for_voice import create_voices_table_query
 from .for_vote import create_votes_table_query
 
@@ -75,12 +73,10 @@ def before_run() -> None:
     """
     create_users_table_query()
     create_seasons_table_query()
-    create_appeals_table_query()
-    create_categorys_table_query()
     create_regions_table_query()
     create_citys_table_query()
+    create_appeals_table_query()
     create_votes_table_query()
-    create_petitions_table_query()
     create_voices_table_query()
 
     return None

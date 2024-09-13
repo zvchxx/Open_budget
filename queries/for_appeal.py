@@ -15,9 +15,13 @@ def create_appeals_table_query() -> None:
     CREATE TABLE IF NOT EXISTS appeals (
         id BIGSERIAL PRIMARY KEY,
         user_id INTEGER NOT NULL REFERENCES users(id),
-        is_active BOOlEAN NOT NULL,
+        city_id BIGINT NOT NULL REFERENCES citys(id),
         is_information VARCHAR(256) NOT NULL,
-        status BOOLEAN DEFAULT FALSE
+        is_accepted BOOLEAN DEFAULT FALSE,
+        is_active BOOLEAN DEFAULT TRUE,
+        total_voices BIGINT NOT NULL DEFAULT 0,
+        is_winner BOOLEAN DEFAULT FALSE,
+        status BOOLEAN DEFAULT True
     );
     """)
     return None
@@ -58,7 +62,7 @@ def get_appeal_from_is_active_query(is_active: bool) -> DictRow:
 
 
 @log_decorator
-def insert_appeal_query(is_active: bool, user_id: int, is_information: str, status: bool) -> None:
+def insert_appeal_query(user_id: int, city_id: int, is_information: str) -> None:
     """
     Inserts a new appeal into the database.
 
@@ -68,26 +72,19 @@ def insert_appeal_query(is_active: bool, user_id: int, is_information: str, stat
     Returns:
         None.
     """
-    query = "INSERT INTO appeals (user_id, is_active, is_information, status) VALUES (%s, %s, %s, %s);"
-    params = (user_id,  is_active, is_information, status,)
+    query = "INSERT INTO appeals (user_id, city_id, is_information) VALUES (%s, %s, %s);"
+    params = (user_id,  city_id, is_information,)
     execute_query(query, params)
     return None
 
 
 @log_decorator
-def update_appeal_query(appeal_id: int, is_active: bool, user_id: int, is_information: str, status: bool) -> None:
+def update_appeal_query(appeal_id: int, user_id: int, city_id: int, is_information: str) -> None:
     """
     Updates a appeal's name in the database.
-
-    Args:
-        appeal_id (int): The ID of the appeal to update.
-        name (str): The new name of the appeal.
-
-    Returns:
-        None.
     """
-    query = "UPDATE appeals SET is_active = %s, user_id = %s, is_information = %s, status = %s WHERE id = %s;"
-    params = (is_active, user_id, is_information, status, appeal_id,)
+    query = "UPDATE appeals SET city_id = %s, user_id = %s, is_information = %s WHERE id = %s;"
+    params = (city_id, user_id, is_information, appeal_id,)
     execute_query(query, params)
     return None
 

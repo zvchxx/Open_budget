@@ -17,6 +17,7 @@ def create_seasons_table_query() -> None:
         id BIGSERIAL PRIMARY KEY,
         start_date TIMESTAMP NOT NULL,
         end_date TIMESTAMP NOT NULL,
+        money VARCHAR(64) NOT NULL,
         is_active BOOlEAN NOT NULL,
         status BOOLEAN DEFAULT FALSE
     );
@@ -59,7 +60,7 @@ def get_season_from_is_active_query(is_active: bool) -> DictRow:
 
 
 @log_decorator
-def insert_season_query(start_date: str, end_date: str, is_active: bool, status: bool) -> None:
+def insert_season_query(start_date: str, end_date: str, is_active: bool, status: bool, money: str) -> None:
     """
     Inserts a new season into the database.
 
@@ -69,14 +70,14 @@ def insert_season_query(start_date: str, end_date: str, is_active: bool, status:
     Returns:
         None.
     """
-    query = "INSERT INTO seasons (start_date, end_date, is_active, status) VALUES (%s, %s, %s, %s);"
-    params = (start_date, end_date, is_active, status,)
+    query = "INSERT INTO seasons (start_date, end_date, is_active, money,status) VALUES (%s, %s, %s, %s, %s);"
+    params = (start_date, end_date, is_active, money, status,)
     execute_query(query, params)
     return None
 
 
 @log_decorator
-def update_season_query(season_id: int, start_date: str, end_date: str, is_active: bool, status: bool) -> None:
+def update_season_query(season_id: int, start_date: str, end_date: str, is_active: bool, status: bool, money: str) -> None:
     """
     Updates a season's name in the database.
 
@@ -87,8 +88,8 @@ def update_season_query(season_id: int, start_date: str, end_date: str, is_activ
     Returns:
         None.
     """
-    query = "UPDATE seasons SET start_date = %s, end_date = %s, is_active = %s, status = %s WHERE id = %s;"
-    params = (start_date, end_date, is_active, status, season_id,)
+    query = "UPDATE seasons SET start_date = %s, end_date = %s, is_active = %s, status = %s, money = %s WHERE id = %s;"
+    params = (start_date, end_date, is_active, status, money, season_id,)
     execute_query(query, params)
     return None
 

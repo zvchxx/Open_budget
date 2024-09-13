@@ -1,3 +1,5 @@
+from typing import Optional
+
 from psycopg2.extras import DictRow
 
 from database_config.db_settings import execute_query
@@ -40,20 +42,19 @@ def get__city_id_query(city_id: int) -> DictRow:
 
 
 @log_decorator
-def get_city_from_name_query(name: str) -> DictRow:
+def get_city_from_name_query(name: str) -> Optional[int]:
     """
-    Retrieves a city from the database by its name.
-
-    Args:
-        name (str): The name of the city to retrieve.
-
-    Returns:
-        DictRow: The retrieved city.
+    Retrieves the id of a city from the database by its name.
     """
-    query = f"SELECT * FROM citys WHERE name = %s;"
+    query = "SELECT id FROM citys WHERE name = %s;"
     params = (name,)
     result = execute_query(query, params, fetch='one')
-    return result
+
+    # If result is not None, extract the id
+    if result:
+        city_id = result['id']
+        return city_id
+    return None
 
 
 @log_decorator
