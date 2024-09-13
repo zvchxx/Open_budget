@@ -50,7 +50,6 @@ def get_city_from_name_query(name: str) -> Optional[int]:
     params = (name,)
     result = execute_query(query, params, fetch='one')
 
-    # If result is not None, extract the id
     if result:
         city_id = result['id']
         return city_id

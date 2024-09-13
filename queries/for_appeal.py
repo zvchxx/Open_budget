@@ -1,3 +1,5 @@
+from typing import Dict, List, Optional
+
 from psycopg2.extras import DictRow
 
 from database_config.db_settings import execute_query
@@ -44,6 +46,27 @@ def get_appeal_from_id_query(appeal_id: int) -> DictRow:
     return result
 
 
+
+@log_decorator
+def get_user_email_from_appeal(appeal_id: int) -> Optional[str]:
+    """
+    Retrieves the email of a user from the 'users' table based on an appeal ID.
+    """
+    query = """
+        SELECT users.email
+        FROM appeals
+        JOIN users ON appeals.user_id = users.id
+        WHERE appeals.id = %s;
+    """
+    params = (appeal_id,)
+    result = execute_query(query, params, fetch='one')
+
+    if result:
+        user_email = result['email']
+        return user_email
+    return None
+
+
 @log_decorator
 def get_appeal_from_is_active_query(is_active: bool) -> DictRow:
     """
@@ -85,6 +108,17 @@ def update_appeal_query(appeal_id: int, user_id: int, city_id: int, is_informati
     """
     query = "UPDATE appeals SET city_id = %s, user_id = %s, is_information = %s WHERE id = %s;"
     params = (city_id, user_id, is_information, appeal_id,)
+    execute_query(query, params)
+    return None
+
+
+@log_decorator
+def update_appeal_accept_query(appeal_id: int, is_accepted: bool) -> None:
+    """
+    Updates a appeal's name in the database.
+    """
+    query = "UPDATE appeals SET is_accepted = %s WHERE id = %s;"
+    params = (is_accepted, appeal_id,)
     execute_query(query, params)
     return None
 
@@ -159,3 +193,20 @@ def search_appeal(appeal_id: int):
     else:
         print("No appeal found.")
     return None
+
+
+@log_decorator
+def get_top_appeals_by_total_voices(limit: int = 10) -> List[Dict]:
+    """
+    Total_voices bo‘yicha eng yuqori qiymatlarni qaytaruvchi funksiyani yaratadi.
+    """
+    query = """
+        SELECT *
+        FROM appeals
+        ORDER BY total_voices DESC
+        LIMIT %s;
+    """
+    params = (limit,)
+    results = execute_query(query, params, fetch='all')
+
+    return results
