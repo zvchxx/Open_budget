@@ -11,7 +11,7 @@ def region_printer(region):
 
 
 def city_printer(city):
-      print(f"""ID: {city[0]}, Name: {city[1]}, Region ID: {city[3]}""")
+      print(f"""ID: {city[0]}, Name: {city[1]}, Region ID: {city[2]}""")
       return None
 
 
@@ -27,8 +27,9 @@ End date: {season[2]}, Is active: {season[3]}, Status: {season[4]}""")
 
 
 def appeal_printer(appeal):
-      print(f"""ID: {appeal[0]}, User ID: {appeal[1]}, Is active: {appeal[2]},
-Information: {[3]}, Status: {appeal[4]}""")
+      print(f"""ID: {appeal[0]}, User ID: {appeal[1]}, City ID: {appeal[2]},
+Information: {appeal[3]}, Is accepted: {appeal[4]}, Is active:{appeal[5]}, Total voice: {appeal[6]},
+IS winner: {appeal[7]}, Status: {appeal[8]}""")
       return None
 
 
