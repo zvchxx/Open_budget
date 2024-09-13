@@ -33,7 +33,7 @@ def user_menu():
         logout()
     else:
         print("Invalid choice. Please try again.")
-    return user_menu()
+        return user_menu()
 
 
 def appeal_menu():

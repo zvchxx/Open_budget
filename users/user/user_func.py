@@ -7,6 +7,8 @@ from utils.printer import appeal_printer, user_printer
 
 from queries.for_user import get_user_id, update_user_query
 
+from queries.for_city import get_city_from_name_query, insert_city_query
+
 
                                                  #appeal
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -20,8 +22,25 @@ def appeal_create():
     elif result == False:
         user_id = int(input("Enter your ID: "))
         inf = input("Enter appeal information: ")
+        print("""
+ID-1:                   ID-2:                   ID-3:
+Andijon viloyati        Buxoro viloyati         Jizzax viloyati
+ID-4:                   ID-5:                   ID-6:
+Qashqadaryo viloyati    Navoiy viloyati         Namangan viloyati
+ID-7:                   ID-8:                   ID-9:
+Samarqand viloyati      Surxondaryo viloyati     Sirdaryo viloyati
+ID-10:                  ID-11:                  ID-12:
+Toshkent shahri         Toshkent viloyati       Farg`ona viloyati
+ID-13:                  ID-14:                  ID-15:
+Xorazm viloyati         Toshkent                Qoraqalpog`iston Respublikasi
+""")
+        region_id = input("Enter region ID: ")
+        city_name = input("Enter neighborhood name: ")
+        insert_city_query(region_id=region_id, name=city_name)
 
-        insert_appeal_query(user_id=user_id, is_active=True, status=True, is_information=inf)
+        result = get_city_from_name_query(name=city_name)
+
+        insert_appeal_query(user_id=user_id, city_id=result, is_information=inf)
         print(f"\nCreated Successfully!") 
         result = get_appeal_id(user_id=user_id)
         print(f"Your appeal information:\n")
@@ -34,13 +53,30 @@ def appeal_update():
     appeal_id = int(input("Enter appeal ID: "))
     user_id = int(input("Enter your ID: "))
     inf = input("Enter appeal information: ")
+    print("""
+ID-1:                   ID-2:                   ID-3:
+Andijon viloyati        Buxoro viloyati         Jizzax viloyati
+ID-4:                   ID-5:                   ID-6:
+Qashqadaryo viloyati    Navoiy viloyati         Namangan viloyati
+ID-7:                   ID-8:                   ID-9:
+Samarqand viloyati      Surxondaryo viloyati     Sirdaryo viloyati
+ID-10:                  ID-11:                  ID-12:
+Toshkent shahri         Toshkent viloyati       Farg`ona viloyati
+ID-13:                  ID-14:                  ID-15:
+Xorazm viloyati         Toshkent                Qoraqalpog`iston Respublikasi
+""")
+    region_id = input("Enter region ID: ")
+    city_name = input("Enter neighborhood name: ")
+    insert_city_query(region_id=region_id, name=city_name)
 
-    update_appeal_query(user_id=user_id, is_active=True, status=True, is_information=inf, appeal_id=appeal_id)
-    print(f"Update Successfully!") 
+    result = get_city_from_name_query(name=city_name)
+
+    update_appeal_query(appeal_id=appeal_id, user_id=user_id, city_id=result, is_information=inf)
+    print(f"\nCreated Successfully!") 
     result = get_appeal_id(user_id=user_id)
-    print(f"Your new appeal information:\n")
+    print(f"Your appeal information:\n")
     for appeal in result:
-            appeal_printer(appeal=appeal)
+        appeal_printer(appeal=appeal)
     return None
 
 
