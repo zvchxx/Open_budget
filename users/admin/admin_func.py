@@ -14,6 +14,7 @@ from utils.printer import appeal_printer
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
+@log_decorator
 def season_create():
     start_date = input("Enter season start date(YYYY-MM-DD HH:MM:SS): ")
     end_date = input("Enter season end date(YYYY-MM-DD HH:MM:SS): ")
@@ -24,6 +25,7 @@ def season_create():
     return None
 
 
+@log_decorator
 def season_update():
     season_id = int(input("Enter season ID: "))
     start_date = int(input("Enter season start date(YYYY-MM-DD HH:MM:SS): "))
@@ -35,6 +37,7 @@ def season_update():
     return None
 
 
+@log_decorator
 def season_delete():
     season_id = int(input("Enter season ID: "))
 
@@ -69,6 +72,7 @@ def send_gmail(to_user, subject, message):
         print(f"Failed {e}")
 
 
+@log_decorator
 def accepting_requests_by_id():
     appeal_id = input("Enter appeal ID: ")
 
