@@ -210,3 +210,17 @@ def get_top_appeals_by_total_voices(limit: int = 10) -> List[Dict]:
     results = execute_query(query, params, fetch='all')
 
     return results
+
+
+@log_decorator
+def increment_total_voices(appeal_id: int) -> None:
+    """
+    Increases the value in the total_voices column in the Appeals table by one.
+    """
+    query = """
+        UPDATE appeals
+        SET total_voices = total_voices + 1
+        WHERE id = %s;
+    """
+    params = (appeal_id,)
+    execute_query(query, params, fetch='none')
