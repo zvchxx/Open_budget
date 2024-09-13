@@ -18,7 +18,7 @@ def user_menu():
 
     if choice == '1':
         result = get_season_from_is_active_query(is_active=True)
-        if True == result['is_active']:
+        if True == result:
             appeal_menu()
         else:
             print("\nThe season hasn't started yet!")
