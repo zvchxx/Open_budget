@@ -27,7 +27,7 @@ def auth_menu():
     print("""
 1. Register
 2. Login            admin login&password = admin
-3. Quit if password
+3. Quit 
 """)
     choice = input("Enter your choice: ")
 

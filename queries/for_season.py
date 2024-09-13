@@ -1,5 +1,7 @@
 from psycopg2.extras import DictRow
 
+from typing import Optional
+
 from database_config.db_settings import execute_query
 
 from log.logs import log_decorator
@@ -38,7 +40,7 @@ def get_season_from_id_query(season_id: int) -> DictRow:
     """
     query = f"SELECT * FROM seasons WHERE id = %s;"
     params = (season_id,)
-    result = execute_query(query, params, fetch='one')
+    result = execute_query(query, params, fetch='all')
     return result
 
 
@@ -53,7 +55,7 @@ def get_season_from_is_active_query(is_active: bool) -> DictRow:
     Returns:
         DictRow: The retrieved season.
     """
-    query = f"SELECT * FROM seasons WHERE is_active = %s;"
+    query = f"SELECT is_active FROM seasons WHERE is_active = %s;"
     params = (is_active,)
     result = execute_query(query, params, fetch='one')
     return result
@@ -143,4 +145,23 @@ def search_season(season_id: int):
            season_printer(season=season)
     else:
         print("No season found.")
+    return None
+
+
+@log_decorator
+def get_season_status(season_id: int) -> Optional[bool]:
+    """
+    Checks the value of the status column in the Seasons table.
+
+    """
+    query = """
+        SELECT status
+        FROM seasons
+        WHERE id = %s;
+    """
+    params = (season_id,)
+    result = execute_query(query, params, fetch='one')
+
+    if result:
+        return result['status']
     return None

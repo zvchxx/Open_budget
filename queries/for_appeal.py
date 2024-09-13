@@ -157,6 +157,39 @@ def get_all_appeals_query() -> list:
     return result
 
 
+@log_decorator
+def get_accepting_appeals_query() -> list:
+    """
+    Retrieves all appeals from the database.
+
+    Returns:
+        List[DictRow]: The retrieved appeals.
+    """
+    query = "SELECT * FROM appeals WHERE is_accepted = False;"
+    result = execute_query(query, fetch='all')
+    if result:
+        print("Appeals:")
+        for appeal in result:
+           appeal_printer(appeal=appeal)
+    else:
+        print("No appeals found.")
+    return result
+
+
+@log_decorator
+def get_all_appeals_admin_query() -> list:
+    """
+    Retrieves all appeals from the database.
+
+    Returns:
+        List[DictRow]: The retrieved appeals.
+    """
+    query = "SELECT * FROM appeals;"
+    result = execute_query(query, fetch='all')
+
+    return result
+
+
 def get_appeals_is_active():
     query = "SELECT is_active FROM appeals WHERE is_active = True LIMIT 1;"
     result = execute_query(query, fetch='one')

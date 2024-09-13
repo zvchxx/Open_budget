@@ -1,5 +1,7 @@
 from auth.login import logout
 
+from queries.for_season import get_season_from_is_active_query
+
 from .user_func import appeal_delete, appeal_create, appeal_update, my_profile, show_my_appeal, show_all_appeals, vote_appeal
 
 
@@ -15,7 +17,11 @@ def user_menu():
     choice = input("Enter your choice: ")
 
     if choice == '1':
-        appeal_menu()
+        result = get_season_from_is_active_query(is_active=True)
+        if True == result['is_active']:
+            appeal_menu()
+        else:
+            print("\nThe season hasn't started yet!")
         return user_menu()
     elif choice == '2':
         show_my_appeal()

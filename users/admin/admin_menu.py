@@ -1,4 +1,5 @@
-from queries.for_appeal import get_all_appeals_query
+from queries.for_appeal import get_accepting_appeals_query, get_all_appeals_admin_query
+from utils.printer import appeal_printer
 
 from .admin_func import announce_winners, season_create, season_delete, season_update, accepting_requests_by_id
 
@@ -24,7 +25,14 @@ def admin_menu():
         announce_winners()
         return admin_menu()
     elif choice == '4':
-        get_all_appeals_query()
+        result = get_all_appeals_admin_query() 
+        num = 0
+        for appeal in result:
+            num += 1
+            f"""
+            {print(f"{num})")}:
+                {appeal_printer(appeal=appeal)}
+                """
         return admin_menu()
     elif choice == '5':
         print("Backing...")
@@ -35,7 +43,7 @@ def admin_menu():
 
 
 def accepting_menu():
-    get_all_appeals_query()
+    get_accepting_appeals_query()
     print("""""
 1. Accepting requests by ID
 2. Quit
