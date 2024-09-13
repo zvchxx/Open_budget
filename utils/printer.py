@@ -27,7 +27,7 @@ End date: {season[2]}, Is active: {season[3]}, Status: {season[4]}""")
 
 
 def appeal_printer(appeal):
-      print(f"""ID: {appeal[0]}, User ID: {appeal[1]}, City ID: {appeal[2]},
+      print(f"""\nID: {appeal[0]}, User ID: {appeal[1]}, City ID: {appeal[2]},
 Information: {appeal[3]}, Is accepted: {appeal[4]}, Is active:{appeal[5]}, Total voice: {appeal[6]},
 IS winner: {appeal[7]}, Status: {appeal[8]}""")
       return None

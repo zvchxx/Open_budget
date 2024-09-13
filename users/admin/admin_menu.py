@@ -1,33 +1,37 @@
 from queries.for_appeal import get_all_appeals_query
 
-from .admin_func import season_create, season_delete, season_update
+from .admin_func import announce_winners, season_create, season_delete, season_update, accepting_requests_by_id
+
 
 def admin_menu():
     print("""
 1. Season
 2. Accepting requests
 3. Announcement of winners
-4. View results live
+4. View results
 5. Quit
     """)
     choice = input("Enter your choice: ")
 
     if choice == '1':
         season_menu()
+        admin_menu()
         return admin_menu()
     elif choice == '2':
         accepting_menu()
+        return admin_menu()
     elif choice == '3':
-        pass
+        announce_winners()
+        return admin_menu()
     elif choice == '4':
-        pass
+        get_all_appeals_query()
+        return admin_menu()
     elif choice == '5':
         print("Backing...")
         return None
     else:
         print("Invalid choice. Please try again.")
-
-    return admin_menu()
+        return admin_menu()
 
 
 def accepting_menu():
@@ -39,9 +43,9 @@ def accepting_menu():
     choice = input("Enter your choice: ")
 
     if choice == '1':
-        pass
+        accepting_requests_by_id()
     elif choice == '2':
-        pass
+        admin_menu()
     else:
         print("Invalid choice. Please try again.")
        

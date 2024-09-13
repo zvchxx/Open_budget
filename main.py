@@ -4,8 +4,9 @@ from auth.login import login
 
 from auth.register import register
 
-from log.logs import log_settings
+from users.admin.admin_menu import admin_menu
 
+from users.user.user_menu import user_menu
 
 def after_login(email: str, status: str):
     """
@@ -13,16 +14,20 @@ def after_login(email: str, status: str):
     """
     if status == "admin":
         print("Welcome Admin!")
+        if None == admin_menu():
+            return auth_menu()
 
     elif status == "user":
         print("Welcome User!")
+        if None == user_menu():
+            return auth_menu()
 
 
 def auth_menu():
     print("""
 1. Register
 2. Login            admin login&password = admin
-3. Quit
+3. Quit if password
 """)
     choice = input("Enter your choice: ")
 
@@ -47,4 +52,3 @@ def auth_menu():
 if __name__ == "__main__":
     if_not_used()
     auth_menu()
-    log_settings()

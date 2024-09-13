@@ -30,7 +30,7 @@ def user_menu():
         return user_menu()
     elif choice == '6':
         print("Backing...")
-        logout()
+        return logout()
     else:
         print("Invalid choice. Please try again.")
         return user_menu()
@@ -55,8 +55,7 @@ def appeal_menu():
         appeal_update()
         return appeal_menu()
     elif choice == '4':
-        print("Backing...")
-        user_menu()
+        return user_menu()
     else:
         print("Invalid choice. Please try again.")
-    return appeal_menu()
+        return appeal_menu()

@@ -15,38 +15,41 @@ from queries.for_city import get_city_from_name_query, insert_city_query
 
 
 def appeal_create():
-    result = get_appeals_is_active()
-    if result == True:
-        print("You have appliedm, I will take you to the update section!")
-        appeal_update()
-    elif result == False:
-        user_id = int(input("Enter your ID: "))
-        inf = input("Enter appeal information: ")
-        print("""
-ID-1:                   ID-2:                   ID-3:
-Andijon viloyati        Buxoro viloyati         Jizzax viloyati
-ID-4:                   ID-5:                   ID-6:
-Qashqadaryo viloyati    Navoiy viloyati         Namangan viloyati
-ID-7:                   ID-8:                   ID-9:
-Samarqand viloyati      Surxondaryo viloyati     Sirdaryo viloyati
-ID-10:                  ID-11:                  ID-12:
-Toshkent shahri         Toshkent viloyati       Farg`ona viloyati
-ID-13:                  ID-14:                  ID-15:
-Xorazm viloyati         Toshkent                Qoraqalpog`iston Respublikasi
-""")
-        region_id = input("Enter region ID: ")
-        city_name = input("Enter neighborhood name: ")
-        insert_city_query(region_id=region_id, name=city_name)
+    try:
+        result = get_appeals_is_active()
+        if result == True:
+            print("You have appliedm, I will take you to the update section!")
+            appeal_update()
+        elif result == False:
+            user_id = int(input("Enter your ID: "))
+            inf = input("Enter appeal information: ")
+            print("""
+    ID-1:                   ID-2:                   ID-3:
+    Andijon viloyati        Buxoro viloyati         Jizzax viloyati
+    ID-4:                   ID-5:                   ID-6:
+    Qashqadaryo viloyati    Navoiy viloyati         Namangan viloyati
+    ID-7:                   ID-8:                   ID-9:
+    Samarqand viloyati      Surxondaryo viloyati     Sirdaryo viloyati
+    ID-10:                  ID-11:                  ID-12:
+    Toshkent shahri         Toshkent viloyati       Farg`ona viloyati
+    ID-13:                  ID-14:                  ID-15:
+    Xorazm viloyati         Toshkent                Qoraqalpog`iston Respublikasi
+    """)
+            region_id = input("Enter region ID: ")
+            city_name = input("Enter neighborhood name: ")
+            insert_city_query(region_id=region_id, name=city_name)
 
-        result = get_city_from_name_query(name=city_name)
+            result = get_city_from_name_query(name=city_name)
 
-        insert_appeal_query(user_id=user_id, city_id=result, is_information=inf)
-        print(f"\nCreated Successfully!") 
-        result = get_appeal_id(user_id=user_id)
-        print(f"Your appeal information:\n")
-        for appeal in result:
-            appeal_printer(appeal=appeal)
-        return None
+            insert_appeal_query(user_id=user_id, city_id=result, is_information=inf)
+            print(f"\nCreated Successfully!") 
+            result = get_appeal_id(user_id=user_id)
+            print(f"Your appeal information:\n")
+            for appeal in result:
+                appeal_printer(appeal=appeal)
+            return None
+    except Exception as e:
+        return e
 
 
 def appeal_update():
