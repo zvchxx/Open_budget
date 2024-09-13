@@ -42,7 +42,7 @@ def appeal_create():
     ID-13:                  ID-14:                  ID-15:
     Xorazm viloyati         Toshkent                Qoraqalpog`iston Respublikasi
     """)
-            region_id = input("Enter region ID: ")
+            region_id = input("Enter city ID: ")
             city_name = input("Enter neighborhood name: ")
             insert_city_query(region_id=region_id, name=city_name)
 
@@ -76,7 +76,7 @@ Toshkent shahri         Toshkent viloyati       Farg`ona viloyati
 ID-13:                  ID-14:                  ID-15:
 Xorazm viloyati         Toshkent                Qoraqalpog`iston Respublikasi
 """)
-    region_id = input("Enter region ID: ")
+    region_id = input("Enter city ID: ")
     city_name = input("Enter neighborhood name: ")
     insert_city_query(region_id=region_id, name=city_name)
 
