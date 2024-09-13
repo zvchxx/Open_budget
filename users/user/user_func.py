@@ -215,10 +215,10 @@ def vote_appeal():
     t = threading.Thread(target=send_gmail, args=(enter_email, "Open Budget", password,))
     t.start()
 
-    enter_password = str(input("Enter password: "))
+    enter_password = str(input("Enter code: "))
     while enter_password != password:
         print("Without typing the EXIT word, it goes to the menu")
-        enter_password = str(input("Re-Enter password: "))
+        enter_password = str(input("Re-Enter code: "))
         if enter_password == "EXIT" or enter_password == "exit":
             return None
 
