@@ -55,7 +55,7 @@ def get_season_from_is_active_query(is_active: bool) -> DictRow:
     Returns:
         DictRow: The retrieved season.
     """
-    query = f"SELECT is_active FROM seasons WHERE is_active = %s;"
+    query = f"SELECT status FROM seasons WHERE is_active = %s;"
     params = (is_active,)
     result = execute_query(query, params, fetch='one')
     return result
