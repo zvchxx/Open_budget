@@ -58,7 +58,12 @@ def get_season_from_is_active_query(is_active: bool) -> DictRow:
     query = f"SELECT status FROM seasons WHERE is_active = %s;"
     params = (is_active,)
     result = execute_query(query, params, fetch='one')
-    return result
+    if result:
+        status = result[0]
+    else:
+        status = None
+    
+    return status
 
 
 @log_decorator

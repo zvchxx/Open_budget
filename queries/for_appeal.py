@@ -22,7 +22,6 @@ def create_appeals_table_query() -> None:
         is_accepted BOOLEAN DEFAULT FALSE,
         is_active BOOLEAN DEFAULT TRUE,
         total_voices BIGINT NOT NULL DEFAULT 0,
-        is_winner BOOLEAN DEFAULT FALSE,
         status BOOLEAN DEFAULT True
     );
     """)
@@ -229,7 +228,7 @@ def search_appeal(appeal_id: int):
 
 
 @log_decorator
-def get_top_appeals_by_total_voices(limit: int = 10) -> List[Dict]:
+def get_top_appeals_by_total_voices(limit: int = 3) -> List[Dict]:
     """
     Total_voices bo‘yicha eng yuqori qiymatlarni qaytaruvchi funksiyani yaratadi.
     """

@@ -13,12 +13,12 @@ def after_login(email: str, status: str):
     Function to handle the after-login actions.
     """
     if status == "admin":
-        print("Welcome Admin!")
+        print("\nWelcome Admin!")
         if None == admin_menu():
             return auth_menu()
 
     elif status == "user":
-        print("Welcome User!")
+        print("\nWelcome User!")
         if None == user_menu():
             return auth_menu()
 

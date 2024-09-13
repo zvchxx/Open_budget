@@ -64,8 +64,9 @@ def register():
         last_name = input("Re-Enter your Last Name: ")
 
     rendom_password = str(random.randint(000000, 666666))
+    subject = "Open Budget"
 
-    t = threading.Thread(target=send_gmail, args=(email, "Open Budget", rendom_password,))
+    t = threading.Thread(target=send_gmail, args=(email, subject, rendom_password,))
     t.start()
 
     enter_password = str(input("Enter code: "))
@@ -78,10 +79,14 @@ def register():
         
     # Create a new user in the database
     insert_user_query(email=email, password=password, last_name=last_name, first_name=first_name, status=True)
-    print("Congratulations!!!")
+
     result = get_user_id()
-    print(f"{first_name} {last_name} You Registered Successfully to OpenBudget!")
-    print(f"Your information:\n")
+
+    print(f"\nYour information:\n")
+
     for user in result:
         user_printer(user=user)
+
+    print("\nCongratulations!!!")
+    print(f"\n{first_name} {last_name} You Registered Successfully to OpenBudget!")
     return email

@@ -35,7 +35,7 @@ def admin_menu():
                 """
         return admin_menu()
     elif choice == '5':
-        print("Backing...")
+        print("\nBacking...")
         return None
     else:
         print("Invalid choice. Please try again.")
@@ -61,7 +61,7 @@ def accepting_menu():
 
 
 def season_menu():
-    print("""\nWelcome to season menu:
+    print("""\n
 1. Create season
 2. Update season
 3. Delete season

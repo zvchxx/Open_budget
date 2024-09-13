@@ -16,35 +16,44 @@ from utils.printer import appeal_printer
 
 @log_decorator
 def season_create():
-    start_date = input("Enter season start date(YYYY-MM-DD HH:MM:SS): ")
-    end_date = input("Enter season end date(YYYY-MM-DD HH:MM:SS): ")
-    money = input("Enter season money: ")
+    try:
+        start_date = input("Enter season start date(YYYY-MM-DD HH:MM:SS): ")
+        end_date = input("Enter season end date(YYYY-MM-DD HH:MM:SS): ")
+        money = input("Enter season money: ")
 
-    insert_season_query(start_date=start_date, end_date=end_date, is_active=True, money=money,status=True)
-    print(f"\nCreated Successfully!") 
-    return None
+        insert_season_query(start_date=start_date, end_date=end_date, is_active=True, money=money,status=True)
+        print(f"\nCreated Successfully!") 
+        return None
+    except Exception as a :
+        print(f"Error: {a}")
 
 
 @log_decorator
 def season_update():
-    season_id = int(input("Enter season ID: "))
-    start_date = int(input("Enter season start date(YYYY-MM-DD HH:MM:SS): "))
-    end_date = int(input("Enter season end date(YYYY-MM-DD HH:MM:SS): "))
-    money = input("Enter season money: ")
+    try:
+        season_id = int(input("Enter season ID: "))
+        start_date = int(input("Enter season start date(YYYY-MM-DD HH:MM:SS): "))
+        end_date = int(input("Enter season end date(YYYY-MM-DD HH:MM:SS): "))
+        money = input("Enter season money: ")
 
-    update_season_query(season_id=season_id, start_date=start_date, end_date=end_date, is_active=True, money=money, status=True)
-    print(f"Update Successfully!") 
-    return None
+        update_season_query(season_id=season_id, start_date=start_date, end_date=end_date, is_active=True, money=money, status=True)
+        print(f"\nUpdate Successfully!") 
+        return None
+    except Exception as a :
+        print(f"Error: {a}")
 
 
 @log_decorator
 def season_delete():
-    season_id = int(input("Enter season ID: "))
+    try:
+        season_id = int(input("Enter season ID: "))
 
-    delete_season_query(season_id=season_id)
+        delete_season_query(season_id=season_id)
 
-    print(f"Delete Successfully!")
-    return None
+        print(f"\nDelete Successfully!")
+        return None
+    except Exception as a :
+        print(f"Error: {a}")
     
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -69,26 +78,29 @@ def send_gmail(to_user, subject, message):
         server.sendmail(smtp_sender, to_user, n_message)
         server.quit()
     except smtplib.SMTPException as e:
-        print(f"Failed {e}")
+        print(f"\nFailed {e}")
 
 
 @log_decorator
 def accepting_requests_by_id():
-    appeal_id = input("Enter appeal ID: ")
+    try:
+        appeal_id = input("Enter appeal ID: ")
 
-    user_subject = "Open Budget"
+        user_subject = "Open Budget"
 
-    message = "Your application has been accepted and you can collect votes!"
-    
-    result = get_user_email_from_appeal(appeal_id=appeal_id)
-    update_appeal_accept_query(appeal_id=appeal_id, is_accepted=True) 
+        message = "Your application has been accepted and you can collect votes!"
+        
+        result = get_user_email_from_appeal(appeal_id=appeal_id)
+        update_appeal_accept_query(appeal_id=appeal_id, is_accepted=True) 
 
-    t = threading.Thread(target=send_gmail, args=(result, user_subject, message,))
-    t.start()     
+        t = threading.Thread(target=send_gmail, args=(result, user_subject, message,))
+        t.start()     
 
-    print("\nAccepting requests\n")
+        print("\nAccepting requests\n")
 
-    return None
+        return None
+    except Exception as a :
+        print(f"Error: {a}")
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -97,13 +109,16 @@ def accepting_requests_by_id():
 
 
 def announce_winners():
-    result = get_top_appeals_by_total_voices()
+    try:
+        result = get_top_appeals_by_total_voices()
 
-    num = 0
-    for winner in result:
-        num += 1
-        f"""
-        {print(f"{num})")}:
-            {appeal_printer(winner)}
-            """
-    return None
+        num = 0
+        for winner in result:
+            num += 1
+            f"""
+            {print(f"{num})")}:
+                {appeal_printer(winner)}
+                """
+        return None
+    except Exception as a :
+        print(f"Error: {a}")

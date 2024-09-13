@@ -2,10 +2,13 @@ from auth.login import logout
 
 from queries.for_season import get_season_from_is_active_query
 
+from queries.for_user import update_users_status_query
+
 from .user_func import appeal_delete, appeal_create, appeal_update, my_profile, show_my_appeal, show_all_appeals, vote_appeal
 
 
 def user_menu():
+    update_users_status_query()
     print("""
 1. Send a appeal
 2. My appeal
@@ -17,8 +20,8 @@ def user_menu():
     choice = input("Enter your choice: ")
 
     if choice == '1':
-        result = get_season_from_is_active_query(is_active=True)
-        if True == result:
+        status = get_season_from_is_active_query(is_active=True)
+        if True == status:
             appeal_menu()
         else:
             print("\nThe season hasn't started yet!")

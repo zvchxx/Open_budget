@@ -135,6 +135,17 @@ def get_all_users_query() -> list:
     return None
 
 
+@log_decorator
+def update_users_status_query():
+    """
+    Updates a appeal's name in the database.
+    """
+    query = "UPDATE appeals SET status = True WHERE status = False;"
+    
+    execute_query(query)
+    return None
+
+
 def get_user_id():
     query = "SELECT * FROM users WHERE status = True;"
     result = execute_query(query, fetch='all')
