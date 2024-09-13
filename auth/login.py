@@ -32,7 +32,7 @@ def login():
 
 
 @log_decorator
-def logout(self):
+def logout():
     """
             Set the login status of all users to False (i.e., log out all users).
     """
